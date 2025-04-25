@@ -1,0 +1,66 @@
+import SpriteKit
+
+class Hero {
+
+	let name: String
+
+	var maxHealth: Int
+	var currentHealth: Int
+
+	var maxMana: Int
+	var currentMana: Int
+
+	var minDamage: Int
+	var maxDamage: Int
+
+	var blockChance: Int
+	var criticalRate: Int
+
+	var armor: Int
+
+	var skills: [Skill]
+
+	var spells: [Spell]
+
+	var weaponType: HeroWeaponType
+
+	var inventory: [Item]
+
+	// Link to sprite and bars
+	weak var spriteNode: SKNode?
+	weak var healthBar: SKShapeNode?
+	weak var manaBar: SKShapeNode?
+
+	init(
+		 name: String,
+		 maxHealth: Int,
+		 currentHealth: Int,
+		 maxMana: Int,
+		 currentMana: Int,
+		 maxDamage: Int,
+		 minDamage: Int,
+		 blockChance: Int,
+		 criticalRate: Int,
+		 armor: Int,
+		 skills: [Skill],
+		 spells: [Spell],
+		 weaponType: HeroWeaponType,
+		 inventory: [Item]
+	) {
+		self.name = name
+		self.maxHealth = maxHealth
+		self.currentHealth = currentHealth
+		self.maxMana = maxMana
+		self.currentMana = currentMana
+		self.maxDamage = maxDamage
+		self.minDamage = minDamage
+		self.blockChance = blockChance
+		self.criticalRate = criticalRate
+		self.armor = armor
+		self.skills = skills
+		self.spells = spells
+		self.weaponType = weaponType
+		self.inventory = inventory
+	}
+
+}

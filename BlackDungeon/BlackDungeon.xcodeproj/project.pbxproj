@@ -13,6 +13,13 @@
 		DDA9F16B2DBBD422009B5877 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDA9F16A2DBBD422009B5877 /* Assets.xcassets */; };
 		DDA9F16E2DBBD422009B5877 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDA9F16C2DBBD422009B5877 /* LaunchScreen.storyboard */; };
 		DDA9F1752DBBD48B009B5877 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1742DBBD485009B5877 /* SceneDelegate.swift */; };
+		DDA9F17C2DBBDCEB009B5877 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F17B2DBBDCEB009B5877 /* Hero.swift */; };
+		DDA9F17F2DBBE123009B5877 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F17E2DBBE123009B5877 /* Enemy.swift */; };
+		DDA9F1812DBBE1B3009B5877 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1802DBBE1B3009B5877 /* Skill.swift */; };
+		DDA9F1832DBBE227009B5877 /* Spell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1822DBBE227009B5877 /* Spell.swift */; };
+		DDA9F1862DBBE407009B5877 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1852DBBE407009B5877 /* GlobalVariables.swift */; };
+		DDA9F1882DBBE4BF009B5877 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1872DBBE4BF009B5877 /* Weapon.swift */; };
+		DDA9F18A2DBBE55E009B5877 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1892DBBE55E009B5877 /* Items.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +31,14 @@
 		DDA9F16D2DBBD422009B5877 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DDA9F1742DBBD485009B5877 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		DDA9F1762DBBD5BB009B5877 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DDA9F17B2DBBDCEB009B5877 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
+		DDA9F17E2DBBE123009B5877 /* Enemy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		DDA9F1802DBBE1B3009B5877 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
+		DDA9F1822DBBE227009B5877 /* Spell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spell.swift; sourceTree = "<group>"; };
+		DDA9F1852DBBE407009B5877 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
+		DDA9F1872DBBE4BF009B5877 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
+		DDA9F1892DBBE55E009B5877 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		DDA9F18B2DBBE60A009B5877 /* Armor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +71,55 @@
 		DDA9F15C2DBBD41E009B5877 /* BlackDungeon */ = {
 			isa = PBXGroup;
 			children = (
+				DDA9F1852DBBE407009B5877 /* GlobalVariables.swift */,
+				DDA9F17A2DBBDCBF009B5877 /* Controller */,
+				DDA9F1792DBBDCBB009B5877 /* Scenes */,
+				DDA9F1782DBBDCB8009B5877 /* Model */,
+				DDA9F1772DBBDCAB009B5877 /* Helpers */,
 				DDA9F1762DBBD5BB009B5877 /* Info.plist */,
-				DDA9F1742DBBD485009B5877 /* SceneDelegate.swift */,
-				DDA9F15D2DBBD41E009B5877 /* AppDelegate.swift */,
-				DDA9F1632DBBD41E009B5877 /* GameScene.swift */,
-				DDA9F1652DBBD41E009B5877 /* GameViewController.swift */,
-				DDA9F16A2DBBD422009B5877 /* Assets.xcassets */,
-				DDA9F16C2DBBD422009B5877 /* LaunchScreen.storyboard */,
 			);
 			path = BlackDungeon;
+			sourceTree = "<group>";
+		};
+		DDA9F1772DBBDCAB009B5877 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DDA9F1742DBBD485009B5877 /* SceneDelegate.swift */,
+				DDA9F15D2DBBD41E009B5877 /* AppDelegate.swift */,
+				DDA9F16C2DBBD422009B5877 /* LaunchScreen.storyboard */,
+				DDA9F16A2DBBD422009B5877 /* Assets.xcassets */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DDA9F1782DBBDCB8009B5877 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DDA9F17B2DBBDCEB009B5877 /* Hero.swift */,
+				DDA9F17E2DBBE123009B5877 /* Enemy.swift */,
+				DDA9F1802DBBE1B3009B5877 /* Skill.swift */,
+				DDA9F1822DBBE227009B5877 /* Spell.swift */,
+				DDA9F1872DBBE4BF009B5877 /* Weapon.swift */,
+				DDA9F1892DBBE55E009B5877 /* Items.swift */,
+				DDA9F18B2DBBE60A009B5877 /* Armor.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DDA9F1792DBBDCBB009B5877 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DDA9F1632DBBD41E009B5877 /* GameScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		DDA9F17A2DBBDCBF009B5877 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DDA9F1652DBBD41E009B5877 /* GameViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +192,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDA9F1812DBBE1B3009B5877 /* Skill.swift in Sources */,
+				DDA9F17C2DBBDCEB009B5877 /* Hero.swift in Sources */,
 				DDA9F1642DBBD41E009B5877 /* GameScene.swift in Sources */,
+				DDA9F1862DBBE407009B5877 /* GlobalVariables.swift in Sources */,
+				DDA9F17F2DBBE123009B5877 /* Enemy.swift in Sources */,
+				DDA9F18A2DBBE55E009B5877 /* Items.swift in Sources */,
+				DDA9F1882DBBE4BF009B5877 /* Weapon.swift in Sources */,
 				DDA9F1662DBBD41E009B5877 /* GameViewController.swift in Sources */,
 				DDA9F15E2DBBD41E009B5877 /* AppDelegate.swift in Sources */,
+				DDA9F1832DBBE227009B5877 /* Spell.swift in Sources */,
 				DDA9F1752DBBD48B009B5877 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
