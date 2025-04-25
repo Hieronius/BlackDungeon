@@ -5,13 +5,16 @@ class GameScene: SKScene {
 	var hero: Hero!
 	var enemy: Enemy!
 	var attackButton: SKLabelNode!
+	var roundLabel: SKLabelNode!
+	var currentRound: Int = 1
+	var isHeroTurn: Bool = true  // To track whose turn it is
 
 	override func didMove(to view: SKView) {
 		backgroundColor = .black
 
 		hero = Hero(name: "Hieronius", maxHealth: 100, currentHealth: 100, maxMana: 100, currentMana: 100, maxDamage: 15, minDamage: 10, blockChance: 10, criticalRate: 10, armor: 10, skills: [], spells: [], weaponType: .twoHandedSword, inventory: [])
 
-		enemy = Enemy(type: .skeleton, maxHealth: 50, currentHealth: 50, maxMana: 50, currentMana: 50, maxDamage: 10, minDamage: 5, blockChance: 5, criticalRate: 5, armor: 5, skills: [], spells: [], weaponType: .sword, inventory: [])
+		enemy = Enemy(type: .skeleton, maxHealth: 50, currentHealth: 50, maxMana: 50, currentMana: 50, maxDamage: 15, minDamage: 10, blockChance: 5, criticalRate: 5, armor: 5, skills: [], spells: [], weaponType: .sword, inventory: [])
 
 		let topHeight = size.height * 0.2
 		let middleHeight = size.height * 0.5
@@ -124,6 +127,18 @@ class GameScene: SKScene {
 		attackButton.name = "attackButton"
 		addChild(attackButton)
 
+		// Create the Round Counter at the top
+		roundLabel = SKLabelNode(text: "Round: \(currentRound)")
+		roundLabel.fontName = "Helvetica-Bold"
+		roundLabel.fontSize = 30
+		roundLabel.fontColor = .white
+		roundLabel.position = CGPoint(x: size.width / 2, y: size.height - topHeight / 2)
+		addChild(roundLabel)
+
+		var roundLabel: SKLabelNode!
+		var currentRound: Int = 1
+		var isHeroTurn: Bool = true  // To track whose turn it is
+
 		let bottomArea = SKShapeNode(rect: CGRect(x: 0, y: 0, width: size.width, height: bottomHeight))
 		bottomArea.strokeColor = .white
 		bottomArea.lineWidth = 2
@@ -178,23 +193,56 @@ class GameScene: SKScene {
 				let nodesAtPoint = self.nodes(at: location)
 
 				if nodesAtPoint.contains(attackButton) {
-					performAttack()
+					performHeroAttack()
 				}
 			}
 		}
 
-		// Attack logic
-		func performAttack() {
-			// Calculate the damage
-			let avgDamage = (CGFloat(hero.maxDamage) + CGFloat(hero.minDamage)) / 2
-			let damageDealt = max(0, avgDamage - CGFloat(enemy.armor))
+	// Hero's Attack
+		func performHeroAttack() {
+			if isHeroTurn {
+				// Calculate the damage
+				let avgDamage = (CGFloat(hero.maxDamage) + CGFloat(hero.minDamage)) / 2
+				let damageDealt = max(0, avgDamage - CGFloat(enemy.armor))
 
-			// Apply damage to enemy
-			enemy.currentHealth = max(0, enemy.currentHealth - Int(damageDealt))
+				print("enemy got \(damageDealt) amount of damage")
 
-			// Update enemy health bar
-			updateBarsForEnemy(for: enemy)
+				// Apply damage to enemy
+				enemy.currentHealth = max(0, enemy.currentHealth - Int(damageDealt))
 
-			print("Hero attacked! Dealt \(Int(damageDealt)) damage to enemy.")
+				// Update enemy health bar
+				updateBarsForEnemy(for: enemy)
+
+				// Switch to enemy's turn
+				isHeroTurn = false
+
+				// Perform enemy's attack after a short delay
+				run(SKAction.wait(forDuration: 1.0)) {
+					self.performEnemyAttack()
+				}
+			}
+		}
+
+	// Enemy's Attack
+		func performEnemyAttack() {
+			if !isHeroTurn {
+				// Calculate the damage
+				let avgDamage = (CGFloat(enemy.maxDamage) + CGFloat(enemy.minDamage)) / 2
+				let damageDealt = max(0, avgDamage - CGFloat(hero.armor))
+				print("hero suffered \(damageDealt)")
+
+				// Apply damage to hero
+				hero.currentHealth = max(0, hero.currentHealth - Int(damageDealt))
+
+				// Update hero health bar
+				updateBarsForHero(for: hero)
+
+				// Switch back to hero's turn
+				isHeroTurn = true
+
+				// Increment the round counter
+				currentRound += 1
+				roundLabel.text = "Round: \(currentRound)"
+			}
 		}
 }
