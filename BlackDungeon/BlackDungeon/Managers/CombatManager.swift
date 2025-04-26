@@ -55,7 +55,9 @@ class CombatManager {
 
 	func resetGame() {
 		scene.currentRound = 1
+		scene.currentRoom = 1
 		scene.roundLabel.text = "Round: 1"
+		scene.roomLabel.text = "Room: 1"
 		scene.isHeroTurn = true
 
 		scene.hero.currentHealth = scene.hero.maxHealth

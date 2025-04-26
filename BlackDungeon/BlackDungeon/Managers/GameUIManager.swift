@@ -209,9 +209,19 @@ class GameUIManager {
 		scene.roundLabel = SKLabelNode(text: "Round: \(scene.currentRound)")
 		scene.roundLabel.fontName = "Helvetica-Bold"
 		scene.roundLabel.fontSize = 30
-		scene.roundLabel.position = CGPoint(x: scene.size.width / 2,
+		scene.roundLabel.position = CGPoint(x: scene.size.width / 4,
 										   y: scene.size.height - topHeight / 2)
+
 		scene.addChild(scene.roundLabel)
+
+		// MARK: Room Label
+		scene.roomLabel = SKLabelNode(text: "Room: \(scene.currentRoom)")
+		scene.roomLabel.fontName = "Helvetica-Bold"
+		scene.roomLabel.fontSize = 30
+		scene.roomLabel.position = CGPoint(x: scene.size.width * 0.75,
+										   y: scene.size.height - topHeight / 2)
+		scene.addChild(scene.roomLabel)
+
 
 		// MARK: End Turn Button
 		scene.endTurnButton = SKShapeNode(rectOf: buttonSize, cornerRadius: 10)

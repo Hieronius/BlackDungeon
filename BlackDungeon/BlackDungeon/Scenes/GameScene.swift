@@ -5,6 +5,7 @@ class GameScene: SKScene {
 
 	// Game state
 	var currentRound: Int = 1
+	var currentRoom: Int = 1
 	var isHeroTurn: Bool = true
 
 	// Characters
@@ -15,6 +16,7 @@ class GameScene: SKScene {
 	var attackButton: SKShapeNode!
 	var endTurnButton: SKShapeNode!
 	var roundLabel: SKLabelNode!
+	var roomLabel: SKLabelNode!
 	let gameOverScreen = SKNode()
 	let resultLabel = SKLabelNode()
 	var actionButton: SKShapeNode!

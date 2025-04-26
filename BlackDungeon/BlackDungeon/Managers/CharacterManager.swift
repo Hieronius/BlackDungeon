@@ -52,7 +52,9 @@ class CharacterManager {
 		scene.hero.currentEnergy = scene.hero.maxEnergy
 
 		scene.currentRound = 1
+		scene.currentRoom += 1
 		scene.roundLabel.text = "Round: 1"
+		scene.roomLabel.text = "Room: \(scene.currentRoom)"
 		scene.isHeroTurn = true
 
 		scene.uiManager.updateBarsForEnemy(for: scene.enemy)
