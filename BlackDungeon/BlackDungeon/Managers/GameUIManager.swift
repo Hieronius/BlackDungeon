@@ -213,7 +213,7 @@ class GameUIManager {
 			// Button labels (row-major order)
 			let buttonLabels = [
 				["Spells", "Skills", "Inventory"],
-				["Battle Log", "Map", "Target"]
+				["Log", "Map", "Info"]
 			]
 
 		// Create buttons in grid
