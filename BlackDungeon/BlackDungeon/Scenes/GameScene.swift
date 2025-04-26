@@ -12,7 +12,8 @@ class GameScene: SKScene {
 	var enemy: Enemy!
 
 	// UI Elements
-	var attackButton: SKLabelNode!
+	var attackButton: SKShapeNode!
+	var endTurnButton: SKShapeNode!
 	var roundLabel: SKLabelNode!
 }
 
@@ -58,57 +59,52 @@ extension GameScene {
 	}
 
 	// MARK: - Combat System
-	func performHeroAttack() {
 
-		if isHeroTurn && hero.currentEnergy >= 1 {
+	func performAttack() {
 
-			hero.currentEnergy -= 1
+		if isHeroTurn {
+			if hero.currentEnergy >= 1 {
+				hero.currentEnergy -= 1
+				updateBarsForHero(for: hero)
 
-			updateBarsForHero(for: hero)
-
-
-			let avgDamage = (CGFloat(hero.maxDamage) + CGFloat(hero.minDamage)) / 2
-			let damageDealt = max(0, avgDamage - CGFloat(enemy.armor))
-
-			enemy.currentHealth = max(0, enemy.currentHealth - Int(damageDealt))
-			updateBarsForEnemy(for: enemy)
-
-		} else {
-			isHeroTurn = false
-			enemy.currentEnergy = 5
-			updateBarsForEnemy(for: enemy)
-			run(SKAction.wait(forDuration: 1.0)) {
-				self.performEnemyAttack()
+				let avgDamage = (CGFloat(hero.maxDamage) + CGFloat(hero.minDamage)) / 2
+				let damageDealt = max(0, avgDamage - CGFloat(enemy.armor))
+				enemy.currentHealth = max(0, enemy.currentHealth - Int(damageDealt))
+				updateBarsForEnemy(for: enemy)
 			}
-			print("Not enough energy, pass the turn to enemy")
-			return
+		} else {
+			if enemy.currentEnergy >= 1 {
+				enemy.currentEnergy -= 1
+				updateBarsForEnemy(for: enemy)
+
+				let avgDamage = (CGFloat(enemy.maxDamage) + CGFloat(enemy.minDamage)) / 2
+				let damageDealt = max(0, avgDamage - CGFloat(hero.armor))
+				hero.currentHealth = max(0, hero.currentHealth - Int(damageDealt))
+				updateBarsForHero(for: hero)
+			}
 		}
 	}
 
-	func performEnemyAttack() {
+	func endCurrentTurn() {
 
-		if !isHeroTurn && enemy.currentEnergy >= 1 {
-
-			enemy.currentEnergy -= 1
-
+		if isHeroTurn {
+			isHeroTurn = false
+			enemy.currentEnergy = 5
 			updateBarsForEnemy(for: enemy)
-
-			let avgDamage = (CGFloat(enemy.maxDamage) + CGFloat(enemy.minDamage)) / 2
-			let damageDealt = max(0, avgDamage - CGFloat(hero.armor))
-
-			hero.currentHealth = max(0, hero.currentHealth - Int(damageDealt))
-			updateBarsForHero(for: hero)
-			performEnemyAttack()
-
 		} else {
 			isHeroTurn = true
 			hero.currentEnergy = 5
-			updateBarsForHero(for: hero)
 			currentRound += 1
 			roundLabel.text = "Round: \(currentRound)"
-			print("Not enough energy! Pass the turn to hero")
-			return
+			updateBarsForHero(for: hero)
 		}
+		updateButtonBorders()
+	}
+
+	func updateButtonBorders() {
+		let borderColor: SKColor = isHeroTurn ? .white : .red
+		attackButton.strokeColor = borderColor
+		endTurnButton.strokeColor = borderColor
 	}
 
 	// MARK: - Health/Mana/Energy Bar Updates
@@ -158,8 +154,11 @@ extension GameScene {
 }
 
 // MARK: - Visual Representation Layer
+
 extension GameScene {
+
 	// MARK: - UI Setup
+
 	override func didMove(to view: SKView) {
 		backgroundColor = .black
 		setupCharacters()
@@ -318,16 +317,41 @@ extension GameScene {
 	}
 
 	private func setupButtons() {
-		let bottomHeight = size.height * 0.3
 
-		// Attack button
-		attackButton = SKLabelNode(text: "Attack")
-		attackButton.fontName = "Helvetica-Bold"
-		attackButton.fontSize = 40
-		attackButton.fontColor = .white
-		attackButton.position = CGPoint(x: size.width / 2, y: bottomHeight / 2)
+		let bottomHeight = size.height * 0.3
+		let buttonSize = CGSize(width: 200, height: 60)
+
+		// Attack Button (now with border)
+		attackButton = SKShapeNode(rectOf: buttonSize, cornerRadius: 10)
+		attackButton.position = CGPoint(x: size.width / 2, y: bottomHeight / 2 + 40)
+		attackButton.fillColor = .clear
+		attackButton.strokeColor = isHeroTurn ? .white : .red
+		attackButton.lineWidth = 3
 		attackButton.name = "attackButton"
-		addChild(attackButton)
+
+		let attackLabel = SKLabelNode(text: "Attack")
+		attackLabel.fontName = "Helvetica-Bold"
+		attackLabel.fontSize = 30
+		attackLabel.fontColor = .white
+		attackLabel.verticalAlignmentMode = .center
+		attackLabel.position = CGPoint(x: 0, y: 0)
+		attackButton.addChild(attackLabel)
+
+		// End Turn Button
+		endTurnButton = SKShapeNode(rectOf: buttonSize, cornerRadius: 10)
+		endTurnButton.position = CGPoint(x: size.width / 2, y: bottomHeight / 2 - 40)
+		endTurnButton.fillColor = .clear
+		endTurnButton.strokeColor = isHeroTurn ? .white : .red
+		endTurnButton.lineWidth = 3
+		endTurnButton.name = "endTurnButton"
+
+		let endTurnLabel = SKLabelNode(text: "End Turn")
+		endTurnLabel.fontName = "Helvetica-Bold"
+		endTurnLabel.fontSize = 30
+		endTurnLabel.fontColor = .white
+		endTurnLabel.verticalAlignmentMode = .center
+		endTurnLabel.position = CGPoint(x: 0, y: 0)
+		endTurnButton.addChild(endTurnLabel)
 
 		// Round counter
 		roundLabel = SKLabelNode(text: "Round: \(currentRound)")
@@ -335,6 +359,9 @@ extension GameScene {
 		roundLabel.fontSize = 30
 		roundLabel.fontColor = .white
 		roundLabel.position = CGPoint(x: size.width / 2, y: size.height - (size.height * 0.2) / 2)
+
+		addChild(attackButton)
+		addChild(endTurnButton)
 		addChild(roundLabel)
 	}
 
@@ -353,13 +380,16 @@ extension GameScene {
 	// MARK: - Touch Handling
 
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		for touch in touches {
+			guard let touch = touches.first else { return }
 			let location = touch.location(in: self)
 			let nodesAtPoint = self.nodes(at: location)
 
-			if nodesAtPoint.contains(attackButton) {
-				performHeroAttack()
+			for node in nodesAtPoint {
+				if node.name == "attackButton" || (node.parent?.name == "attackButton") {
+					performAttack()
+				} else if node.name == "endTurnButton" || (node.parent?.name == "endTurnButton") {
+					endCurrentTurn()
+				}
 			}
 		}
-	}
 }
