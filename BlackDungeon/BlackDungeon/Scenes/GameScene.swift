@@ -1,6 +1,8 @@
 import SpriteKit
 
+/// GameScene - Core scene with properties and touch handling
 class GameScene: SKScene {
+
 	// Game state
 	var currentRound: Int = 1
 	var isHeroTurn: Bool = true
@@ -21,6 +23,8 @@ class GameScene: SKScene {
 	lazy var uiManager = GameUIManager(scene: self)
 	lazy var combatManager = CombatManager(scene: self)
 	lazy var characterManager = CharacterManager(scene: self)
+
+	// MARK: Life Cycle
 
 	override func didMove(to view: SKView) {
 		backgroundColor = .black

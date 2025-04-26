@@ -80,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				DDA9F1852DBBE407009B5877 /* GlobalVariables.swift */,
+				DDAB19262DBD3CF700DF3CC3 /* Managers */,
 				DDA9F17A2DBBDCBF009B5877 /* Controller */,
 				DDA9F1792DBBDCBB009B5877 /* Scenes */,
 				DDA9F1782DBBDCB8009B5877 /* Model */,
@@ -127,11 +128,18 @@
 			isa = PBXGroup;
 			children = (
 				DDA9F1652DBBD41E009B5877 /* GameViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		DDAB19262DBD3CF700DF3CC3 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
 				DDAB19202DBD36F800DF3CC3 /* CombatManager.swift */,
 				DDAB19222DBD371600DF3CC3 /* CharacterManager.swift */,
 				DDAB19242DBD372C00DF3CC3 /* GameUIManager.swift */,
 			);
-			path = Controller;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

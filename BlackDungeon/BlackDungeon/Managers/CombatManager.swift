@@ -1,5 +1,6 @@
 import SpriteKit
 
+/// CombatManager - All combat logic (attacks, turns, reset)
 class CombatManager {
 	private unowned let scene: GameScene
 

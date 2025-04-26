@@ -1,5 +1,6 @@
 import SpriteKit
 
+/// CharacterManager - Character setup and spawning
 class CharacterManager {
 	private unowned let scene: GameScene
 
