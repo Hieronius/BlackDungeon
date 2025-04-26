@@ -355,6 +355,7 @@ class GameUIManager {
 		let borderColor: SKColor = scene.isHeroTurn ? .white : .red
 		scene.attackButton.strokeColor = borderColor
 		scene.endTurnButton.strokeColor = borderColor
+		scene.blockButton.strokeColor = borderColor
 	}
 
 	// MARK: - Game Over Flow
