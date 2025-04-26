@@ -21,6 +21,9 @@
 		DDA9F1882DBBE4BF009B5877 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1872DBBE4BF009B5877 /* Weapon.swift */; };
 		DDA9F18A2DBBE55E009B5877 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1892DBBE55E009B5877 /* Items.swift */; };
 		DDA9F18D2DBBFBCC009B5877 /* CombatMechanics in Resources */ = {isa = PBXBuildFile; fileRef = DDA9F18C2DBBFBCC009B5877 /* CombatMechanics */; };
+		DDAB19212DBD36F800DF3CC3 /* CombatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19202DBD36F800DF3CC3 /* CombatManager.swift */; };
+		DDAB19232DBD371600DF3CC3 /* CharacterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19222DBD371600DF3CC3 /* CharacterManager.swift */; };
+		DDAB19252DBD372C00DF3CC3 /* GameUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19242DBD372C00DF3CC3 /* GameUIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,9 @@
 		DDA9F1892DBBE55E009B5877 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		DDA9F18B2DBBE60A009B5877 /* Armor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armor.swift; sourceTree = "<group>"; };
 		DDA9F18C2DBBFBCC009B5877 /* CombatMechanics */ = {isa = PBXFileReference; lastKnownFileType = text; path = CombatMechanics; sourceTree = "<group>"; };
+		DDAB19202DBD36F800DF3CC3 /* CombatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatManager.swift; sourceTree = "<group>"; };
+		DDAB19222DBD371600DF3CC3 /* CharacterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterManager.swift; sourceTree = "<group>"; };
+		DDAB19242DBD372C00DF3CC3 /* GameUIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +127,9 @@
 			isa = PBXGroup;
 			children = (
 				DDA9F1652DBBD41E009B5877 /* GameViewController.swift */,
+				DDAB19202DBD36F800DF3CC3 /* CombatManager.swift */,
+				DDAB19222DBD371600DF3CC3 /* CharacterManager.swift */,
+				DDAB19242DBD372C00DF3CC3 /* GameUIManager.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -203,8 +212,11 @@
 				DDA9F17F2DBBE123009B5877 /* Enemy.swift in Sources */,
 				DDA9F18A2DBBE55E009B5877 /* Items.swift in Sources */,
 				DDA9F1882DBBE4BF009B5877 /* Weapon.swift in Sources */,
+				DDAB19212DBD36F800DF3CC3 /* CombatManager.swift in Sources */,
+				DDAB19232DBD371600DF3CC3 /* CharacterManager.swift in Sources */,
 				DDA9F1662DBBD41E009B5877 /* GameViewController.swift in Sources */,
 				DDA9F15E2DBBD41E009B5877 /* AppDelegate.swift in Sources */,
+				DDAB19252DBD372C00DF3CC3 /* GameUIManager.swift in Sources */,
 				DDA9F1832DBBE227009B5877 /* Spell.swift in Sources */,
 				DDA9F1752DBBD48B009B5877 /* SceneDelegate.swift in Sources */,
 			);
