@@ -11,26 +11,34 @@ class GameUIManager {
 	// MARK: - Main UI Setup
 	func setupGameAreas() {
 		let topHeight = scene.size.height * 0.25
-		let middleHeight = scene.size.height * 0.45
+		let middleHeight = scene.size.height * 0.35
+		let menuHeight = scene.size.height * 0.1
 		let bottomHeight = scene.size.height * 0.3
 
 		// MARK: Top Area
 		let topArea = SKShapeNode(rect: CGRect(x: 0, y: scene.size.height - topHeight,
-											 width: scene.size.width, height: topHeight))
+								 width: scene.size.width, height: topHeight))
 		topArea.strokeColor = .white
 		topArea.lineWidth = 2
 		scene.addChild(topArea)
 
 		// MARK: Middle Area
-		let middleArea = SKShapeNode(rect: CGRect(x: 0, y: bottomHeight,
-												width: scene.size.width, height: middleHeight))
+		let middleArea = SKShapeNode(rect: CGRect(x: 0, y: bottomHeight + menuHeight,
+											  width: scene.size.width, height: middleHeight))
 		middleArea.strokeColor = .white
 		middleArea.lineWidth = 2
 		scene.addChild(middleArea)
 
+		// MARK: Menu Area
+		let menuArea = SKShapeNode(rect: CGRect(x: 0, y: bottomHeight,
+											 width: scene.size.width, height: menuHeight))
+		menuArea.strokeColor = .white
+		menuArea.lineWidth = 2
+		scene.addChild(menuArea)
+
 		// MARK: Bottom Area
 		let bottomArea = SKShapeNode(rect: CGRect(x: 0, y: 0,
-												width: scene.size.width, height: bottomHeight))
+											   width: scene.size.width, height: bottomHeight))
 		bottomArea.strokeColor = .white
 		bottomArea.lineWidth = 2
 		scene.addChild(bottomArea)
