@@ -63,6 +63,7 @@ extension GameScene {
 	func performAttack() {
 
 		if isHeroTurn {
+
 			if hero.currentEnergy >= 1 {
 				hero.currentEnergy -= 1
 				updateBarsForHero(for: hero)
@@ -72,7 +73,9 @@ extension GameScene {
 				enemy.currentHealth = max(0, enemy.currentHealth - Int(damageDealt))
 				updateBarsForEnemy(for: enemy)
 			}
+
 		} else {
+
 			if enemy.currentEnergy >= 1 {
 				enemy.currentEnergy -= 1
 				updateBarsForEnemy(for: enemy)
@@ -91,6 +94,7 @@ extension GameScene {
 			isHeroTurn = false
 			enemy.currentEnergy = 5
 			updateBarsForEnemy(for: enemy)
+			print("pass turn")
 		} else {
 			isHeroTurn = true
 			hero.currentEnergy = 5
@@ -98,6 +102,7 @@ extension GameScene {
 			roundLabel.text = "Round: \(currentRound)"
 			updateBarsForHero(for: hero)
 		}
+		print(isHeroTurn)
 		updateButtonBorders()
 	}
 
@@ -380,16 +385,16 @@ extension GameScene {
 	// MARK: - Touch Handling
 
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-			guard let touch = touches.first else { return }
-			let location = touch.location(in: self)
-			let nodesAtPoint = self.nodes(at: location)
+		guard let touch = touches.first else { return }
+		let location = touch.location(in: self)
+		let nodesAtPoint = self.nodes(at: location)
 
-			for node in nodesAtPoint {
-				if node.name == "attackButton" || (node.parent?.name == "attackButton") {
-					performAttack()
-				} else if node.name == "endTurnButton" || (node.parent?.name == "endTurnButton") {
-					endCurrentTurn()
-				}
+		for node in nodesAtPoint {
+			if node.name == "attackButton" {
+				performAttack()
+			} else if node.name == "endTurnButton" {
+				endCurrentTurn()
 			}
 		}
+	}
 }
