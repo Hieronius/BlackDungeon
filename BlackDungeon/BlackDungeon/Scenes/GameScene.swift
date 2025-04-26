@@ -337,9 +337,16 @@ extension GameScene {
 		attackLabel.position = CGPoint(x: 0, y: 0)
 		attackButton.addChild(attackLabel)
 
-		// End Turn Button
+		// Round counter
+		roundLabel = SKLabelNode(text: "Round: \(currentRound)")
+		roundLabel.fontName = "Helvetica-Bold"
+		roundLabel.fontSize = 30
+		roundLabel.fontColor = .white
+		roundLabel.position = CGPoint(x: size.width / 2, y: size.height - (size.height * 0.2) / 2)
+
+		// End Turn Button (now positioned under round counter)
 		endTurnButton = SKShapeNode(rectOf: buttonSize, cornerRadius: 10)
-		endTurnButton.position = CGPoint(x: size.width / 2, y: bottomHeight / 2 - 40)
+		endTurnButton.position = CGPoint(x: size.width / 2, y: roundLabel.position.y - 50) // 50 points below round counter
 		endTurnButton.fillColor = .clear
 		endTurnButton.strokeColor = isHeroTurn ? .white : .red
 		endTurnButton.lineWidth = 3
@@ -353,16 +360,9 @@ extension GameScene {
 		endTurnLabel.position = CGPoint(x: 0, y: 0)
 		endTurnButton.addChild(endTurnLabel)
 
-		// Round counter
-		roundLabel = SKLabelNode(text: "Round: \(currentRound)")
-		roundLabel.fontName = "Helvetica-Bold"
-		roundLabel.fontSize = 30
-		roundLabel.fontColor = .white
-		roundLabel.position = CGPoint(x: size.width / 2, y: size.height - (size.height * 0.2) / 2)
-
 		addChild(attackButton)
-		addChild(endTurnButton)
 		addChild(roundLabel)
+		addChild(endTurnButton)
 	}
 
 	// MARK: - UI Utilities
