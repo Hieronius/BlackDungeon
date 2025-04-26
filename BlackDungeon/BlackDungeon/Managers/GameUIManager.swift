@@ -10,8 +10,8 @@ class GameUIManager {
 
 	// MARK: - Main UI Setup
 	func setupGameAreas() {
-		let topHeight = scene.size.height * 0.2
-		let middleHeight = scene.size.height * 0.5
+		let topHeight = scene.size.height * 0.25
+		let middleHeight = scene.size.height * 0.45
 		let bottomHeight = scene.size.height * 0.3
 
 		// MARK: Top Area
