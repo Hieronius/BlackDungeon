@@ -57,6 +57,7 @@ class GameScene: SKScene {
 				} else {
 					characterManager.spawnNewEnemy()
 				}
+			case "mapButton": print("MapButton pressed")
 			default: break
 			}
 		}

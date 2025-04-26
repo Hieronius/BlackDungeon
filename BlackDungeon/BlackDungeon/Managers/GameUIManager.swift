@@ -197,6 +197,57 @@ class GameUIManager {
 		let topButtonSize = CGSize(width: 200, height: 60)
 		let botButtonSize = CGSize(width: 100, height: 60)
 
+		// MARK: - Menu Buttons (Perfectly centered in menu area)
+			let menuAreaHeight = scene.size.height * 0.1
+			let menuAreaTop = scene.size.height * 0.3
+
+			// Button configuration
+			let rows = 2
+			let cols = 3
+			let horizontalPadding: CGFloat = 10
+			let verticalPadding: CGFloat = 8
+			let buttonWidth = (scene.size.width - horizontalPadding * CGFloat(cols + 1)) / CGFloat(cols)
+			let buttonHeight = (menuAreaHeight - verticalPadding * CGFloat(rows + 1)) / CGFloat(rows)
+			let buttonSize = CGSize(width: buttonWidth, height: buttonHeight)
+
+			// Button labels (row-major order)
+			let buttonLabels = [
+				["Spells", "Skills", "Inventory"],
+				["Battle Log", "Map", "Target"]
+			]
+
+		// Create buttons in grid
+		for row in 0..<rows {
+			for col in 0..<cols {
+				let xPos = horizontalPadding + (buttonWidth + horizontalPadding) * CGFloat(col) + buttonWidth/2
+				let yPos = menuAreaTop + verticalPadding + (buttonHeight + verticalPadding) * CGFloat(row) + buttonHeight/2
+
+				let button = createButton(
+					size: buttonSize,
+					position: CGPoint(x: xPos, y: yPos),
+					name: "\(buttonLabels[row][col].lowercased().replacingOccurrences(of: " ", with: ""))Button",
+					text: buttonLabels[row][col]
+				)
+
+				// Menu button styling
+				button.fillColor = SKColor(white: 0.2, alpha: 0.7)
+				button.strokeColor = .white
+				button.lineWidth = 1.5
+
+				// Adjust label for "Battle Log" to fit
+				if let label = button.children.first as? SKLabelNode {
+					label.fontSize = min(buttonHeight * 0.5, 18) // Cap at 18pt
+					label.verticalAlignmentMode = .center
+					label.horizontalAlignmentMode = .center
+
+					// Shrink text if needed
+					if buttonLabels[row][col].count > 8 {
+						label.fontSize = min(buttonHeight * 0.5, 20)
+					}
+				}
+			}
+		}
+
 		// MARK: Attack Button
 		scene.attackButton = SKShapeNode(rectOf: botButtonSize, cornerRadius: 10)
 		scene.attackButton.position = CGPoint(x: scene.size.width * 0.25,
@@ -356,6 +407,29 @@ class GameUIManager {
 			updateBar(barNode: manaBar,
 					 widthRatio: CGFloat(character.currentMana) / CGFloat(character.maxMana))
 		}
+	}
+
+	// MARK: Create Button
+	func createButton(size: CGSize, position: CGPoint, name: String, text: String) -> SKShapeNode {
+		let button = SKShapeNode(rectOf: size, cornerRadius: 6) // Slightly rounded corners
+		button.position = position
+		button.fillColor = .clear
+		button.strokeColor = .white // Default color (will be overridden for menu buttons)
+		button.lineWidth = 2
+		button.name = name
+
+		let label = SKLabelNode(text: text)
+		label.fontName = "Helvetica-Bold"
+		label.fontSize = size.height * 0.4 // Dynamic font size based on button height
+		label.fontColor = .white
+		label.verticalAlignmentMode = .center
+		label.horizontalAlignmentMode = .center
+		label.position = .zero // Centered in button
+
+		button.addChild(label)
+		scene.addChild(button)
+
+		return button
 	}
 
 	// MARK: - Button Visual Updates
