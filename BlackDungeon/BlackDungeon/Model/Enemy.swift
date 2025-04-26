@@ -26,8 +26,8 @@ class Enemy {
 	var maxDamage: Int
 	var minDamage: Int
 
-	var maxEnergy: Int,
-    var currentEnergy: Int,
+	var maxEnergy: Int
+    var currentEnergy: Int
 
 	var blockChance: Int
 	var criticalRate: Int
