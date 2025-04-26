@@ -12,9 +12,39 @@ class GameScene: SKScene {
 	override func didMove(to view: SKView) {
 		backgroundColor = .black
 
-		hero = Hero(name: "Hieronius", maxHealth: 100, currentHealth: 100, maxMana: 100, currentMana: 100, maxDamage: 15, minDamage: 10, blockChance: 10, criticalRate: 10, armor: 10, skills: [], spells: [], weaponType: .twoHandedSword, inventory: [])
+		hero = Hero(name: "Hieronius",
+					maxHealth: 100,
+					currentHealth: 100,
+					maxMana: 100,
+					currentMana: 100,
+					maxDamage: 15,
+					minDamage: 10,
+					maxEnergy: 5,
+					currentEnergy: 5,
+					blockChance: 10,
+					criticalRate: 10,
+					armor: 10,
+					skills: [],
+					spells: [],
+					weaponType: .twoHandedSword,
+					inventory: [])
 
-		enemy = Enemy(type: .skeleton, maxHealth: 50, currentHealth: 50, maxMana: 50, currentMana: 50, maxDamage: 15, minDamage: 10, blockChance: 5, criticalRate: 5, armor: 5, skills: [], spells: [], weaponType: .sword, inventory: [])
+		enemy = Enemy(type: .skeleton,
+					  maxHealth: 50,
+					  currentHealth: 50,
+					  maxMana: 50,
+					  currentMana: 50,
+					  maxDamage: 15,
+					  minDamage: 10,
+					  maxEnergy: 5,
+					  currentEnergy: 5,
+					  blockChance: 5,
+					  criticalRate: 5,
+					  armor: 5,
+					  skills: [],
+					  spells: [],
+					  weaponType: .sword,
+					  inventory: [])
 
 		let topHeight = size.height * 0.2
 		let middleHeight = size.height * 0.5

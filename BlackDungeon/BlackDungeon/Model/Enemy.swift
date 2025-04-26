@@ -26,6 +26,9 @@ class Enemy {
 	var maxDamage: Int
 	var minDamage: Int
 
+	var maxEnergy: Int,
+    var currentEnergy: Int,
+
 	var blockChance: Int
 	var criticalRate: Int
 
@@ -52,6 +55,8 @@ class Enemy {
 		 currentMana: Int,
 		 maxDamage: Int,
 		 minDamage: Int,
+		 maxEnergy: Int,
+		 currentEnergy: Int,
 		 blockChance: Int,
 		 criticalRate: Int,
 		 armor: Int,
@@ -67,6 +72,8 @@ class Enemy {
 		self.currentMana = currentMana
 		self.maxDamage = maxDamage
 		self.minDamage = minDamage
+		self.maxEnergy = maxEnergy
+		self.currentEnergy = currentEnergy
 		self.blockChance = blockChance
 		self.criticalRate = criticalRate
 		self.armor = armor

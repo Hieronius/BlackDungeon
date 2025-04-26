@@ -10,6 +10,9 @@ class Hero {
 	var maxMana: Int
 	var currentMana: Int
 
+	var maxEnergy: Int
+	var currentEnergy: Int
+
 	var minDamage: Int
 	var maxDamage: Int
 
@@ -39,6 +42,8 @@ class Hero {
 		 currentMana: Int,
 		 maxDamage: Int,
 		 minDamage: Int,
+		 maxEnergy: Int,
+		 currentEnergy: Int,
 		 blockChance: Int,
 		 criticalRate: Int,
 		 armor: Int,
@@ -54,6 +59,8 @@ class Hero {
 		self.currentMana = currentMana
 		self.maxDamage = maxDamage
 		self.minDamage = minDamage
+		self.maxEnergy = maxEnergy
+		self.currentEnergy = currentEnergy
 		self.blockChance = blockChance
 		self.criticalRate = criticalRate
 		self.armor = armor

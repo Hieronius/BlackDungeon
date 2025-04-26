@@ -20,6 +20,7 @@
 		DDA9F1862DBBE407009B5877 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1852DBBE407009B5877 /* GlobalVariables.swift */; };
 		DDA9F1882DBBE4BF009B5877 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1872DBBE4BF009B5877 /* Weapon.swift */; };
 		DDA9F18A2DBBE55E009B5877 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1892DBBE55E009B5877 /* Items.swift */; };
+		DDA9F18D2DBBFBCC009B5877 /* CombatMechanics in Resources */ = {isa = PBXBuildFile; fileRef = DDA9F18C2DBBFBCC009B5877 /* CombatMechanics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		DDA9F1872DBBE4BF009B5877 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		DDA9F1892DBBE55E009B5877 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		DDA9F18B2DBBE60A009B5877 /* Armor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armor.swift; sourceTree = "<group>"; };
+		DDA9F18C2DBBFBCC009B5877 /* CombatMechanics */ = {isa = PBXFileReference; lastKnownFileType = text; path = CombatMechanics; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				DDA9F1782DBBDCB8009B5877 /* Model */,
 				DDA9F1772DBBDCAB009B5877 /* Helpers */,
 				DDA9F1762DBBD5BB009B5877 /* Info.plist */,
+				DDA9F18C2DBBFBCC009B5877 /* CombatMechanics */,
 			);
 			path = BlackDungeon;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 			files = (
 				DDA9F16B2DBBD422009B5877 /* Assets.xcassets in Resources */,
 				DDA9F16E2DBBD422009B5877 /* LaunchScreen.storyboard in Resources */,
+				DDA9F18D2DBBFBCC009B5877 /* CombatMechanics in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
