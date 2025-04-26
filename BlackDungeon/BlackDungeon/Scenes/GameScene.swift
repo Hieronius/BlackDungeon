@@ -59,34 +59,55 @@ extension GameScene {
 
 	// MARK: - Combat System
 	func performHeroAttack() {
-		if isHeroTurn {
+
+		if isHeroTurn && hero.currentEnergy >= 1 {
+
+			hero.currentEnergy -= 1
+
+			updateBarsForHero(for: hero)
+
+
 			let avgDamage = (CGFloat(hero.maxDamage) + CGFloat(hero.minDamage)) / 2
 			let damageDealt = max(0, avgDamage - CGFloat(enemy.armor))
 
 			enemy.currentHealth = max(0, enemy.currentHealth - Int(damageDealt))
 			updateBarsForEnemy(for: enemy)
 
+		} else {
 			isHeroTurn = false
-			hero.currentEnergy -= 2
-
+			enemy.currentEnergy = 5
+			updateBarsForEnemy(for: enemy)
 			run(SKAction.wait(forDuration: 1.0)) {
 				self.performEnemyAttack()
 			}
+			print("Not enough energy, pass the turn to enemy")
+			return
 		}
 	}
 
 	func performEnemyAttack() {
-		if !isHeroTurn {
+
+		if !isHeroTurn && enemy.currentEnergy >= 1 {
+
+			enemy.currentEnergy -= 1
+
+			updateBarsForEnemy(for: enemy)
+
 			let avgDamage = (CGFloat(enemy.maxDamage) + CGFloat(enemy.minDamage)) / 2
 			let damageDealt = max(0, avgDamage - CGFloat(hero.armor))
 
 			hero.currentHealth = max(0, hero.currentHealth - Int(damageDealt))
 			updateBarsForHero(for: hero)
+			performEnemyAttack()
 
+		} else {
 			isHeroTurn = true
-			enemy.currentEnergy -= 2
+			hero.currentEnergy = 5
+			updateBarsForHero(for: hero)
 			currentRound += 1
 			roundLabel.text = "Round: \(currentRound)"
+			print("Not enough energy! Pass the turn to hero")
+			return
 		}
 	}
 
