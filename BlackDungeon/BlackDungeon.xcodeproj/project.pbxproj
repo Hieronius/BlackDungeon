@@ -24,6 +24,7 @@
 		DDAB19212DBD36F800DF3CC3 /* CombatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19202DBD36F800DF3CC3 /* CombatManager.swift */; };
 		DDAB19232DBD371600DF3CC3 /* CharacterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19222DBD371600DF3CC3 /* CharacterManager.swift */; };
 		DDAB19252DBD372C00DF3CC3 /* GameUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19242DBD372C00DF3CC3 /* GameUIManager.swift */; };
+		DDAB19282DBD41D500DF3CC3 /* EnemiesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19272DBD41D500DF3CC3 /* EnemiesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		DDAB19202DBD36F800DF3CC3 /* CombatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatManager.swift; sourceTree = "<group>"; };
 		DDAB19222DBD371600DF3CC3 /* CharacterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterManager.swift; sourceTree = "<group>"; };
 		DDAB19242DBD372C00DF3CC3 /* GameUIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUIManager.swift; sourceTree = "<group>"; };
+		DDAB19272DBD41D500DF3CC3 /* EnemiesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemiesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				DDAB19202DBD36F800DF3CC3 /* CombatManager.swift */,
 				DDAB19222DBD371600DF3CC3 /* CharacterManager.swift */,
 				DDAB19242DBD372C00DF3CC3 /* GameUIManager.swift */,
+				DDAB19272DBD41D500DF3CC3 /* EnemiesManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				DDA9F1882DBBE4BF009B5877 /* Weapon.swift in Sources */,
 				DDAB19212DBD36F800DF3CC3 /* CombatManager.swift in Sources */,
 				DDAB19232DBD371600DF3CC3 /* CharacterManager.swift in Sources */,
+				DDAB19282DBD41D500DF3CC3 /* EnemiesManager.swift in Sources */,
 				DDA9F1662DBBD41E009B5877 /* GameViewController.swift in Sources */,
 				DDA9F15E2DBBD41E009B5877 /* AppDelegate.swift in Sources */,
 				DDAB19252DBD372C00DF3CC3 /* GameUIManager.swift in Sources */,
