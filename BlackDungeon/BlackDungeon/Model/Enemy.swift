@@ -46,6 +46,7 @@ class Enemy {
 	weak var spriteNode: SKNode?
 	weak var healthBar: SKShapeNode?
 	weak var manaBar: SKShapeNode?
+	weak var energyBar: SKShapeNode?
 
 	init(
 		type: EnemyType,

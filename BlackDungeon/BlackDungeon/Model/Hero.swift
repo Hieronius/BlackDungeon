@@ -33,6 +33,7 @@ class Hero {
 	weak var spriteNode: SKNode?
 	weak var healthBar: SKShapeNode?
 	weak var manaBar: SKShapeNode?
+	weak var energyBar: SKShapeNode?
 
 	init(
 		 name: String,

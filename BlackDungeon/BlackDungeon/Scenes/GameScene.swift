@@ -67,6 +67,7 @@ extension GameScene {
 			updateBarsForEnemy(for: enemy)
 
 			isHeroTurn = false
+			hero.currentEnergy -= 2
 
 			run(SKAction.wait(forDuration: 1.0)) {
 				self.performEnemyAttack()
@@ -83,12 +84,13 @@ extension GameScene {
 			updateBarsForHero(for: hero)
 
 			isHeroTurn = true
+			enemy.currentEnergy -= 2
 			currentRound += 1
 			roundLabel.text = "Round: \(currentRound)"
 		}
 	}
 
-	// MARK: - Health/Mana Bar Updates
+	// MARK: - Health/Mana/Energy Bar Updates
 
 	func updateBar(barNode: SKShapeNode, widthRatio: CGFloat) {
 		let clampedRatio = max(0, min(widthRatio, 1))
@@ -98,6 +100,12 @@ extension GameScene {
 	}
 
 	func updateBarsForHero(for character: Hero) {
+
+		if let energyBar = character.energyBar {
+			let ratio = CGFloat(character.currentEnergy) / CGFloat(character.maxEnergy)
+			updateBar(barNode: energyBar, widthRatio: ratio)
+		}
+
 		if let healthBar = character.healthBar {
 			let ratio = CGFloat(character.currentHealth) / CGFloat(character.maxHealth)
 			updateBar(barNode: healthBar, widthRatio: ratio)
@@ -110,6 +118,12 @@ extension GameScene {
 	}
 
 	func updateBarsForEnemy(for character: Enemy) {
+
+		if let energyBar = character.energyBar {
+			let ratio = CGFloat(character.currentEnergy) / CGFloat(character.maxEnergy)
+			updateBar(barNode: energyBar, widthRatio: ratio)
+		}
+
 		if let healthBar = character.healthBar {
 			let ratio = CGFloat(character.currentHealth) / CGFloat(character.maxHealth)
 			updateBar(barNode: healthBar, widthRatio: ratio)
@@ -180,6 +194,15 @@ extension GameScene {
 		labelH.horizontalAlignmentMode = .center
 		blackSquare.addChild(labelH)
 
+		// Energy Bar
+		let heroEnergyBg = SKShapeNode(rect: CGRect(x: 0, y: 0, width: barWidth, height: barHeight))
+		heroEnergyBg.fillColor = .darkGray
+		heroEnergyBg.strokeColor = .clear
+		heroEnergyBg.position = CGPoint(x: heroPosition.x - barWidth / 2, y: heroPosition.y + barOffset)
+
+		let heroEnergy = createBarNode(width: barWidth, height: barHeight, color: .orange)
+		heroEnergy.position = CGPoint(x: heroPosition.x - barWidth / 2, y: heroPosition.y + barOffset + 15)
+
 		// Health bar
 		let heroHealthBg = SKShapeNode(rect: CGRect(x: 0, y: 0, width: barWidth, height: barHeight))
 		heroHealthBg.fillColor = .darkGray
@@ -201,12 +224,14 @@ extension GameScene {
 		hero.spriteNode = blackSquare
 		hero.healthBar = heroHealth
 		hero.manaBar = heroMana
+		hero.energyBar = heroEnergy
 
 		addChild(blackSquare)
 		addChild(heroHealthBg)
 		addChild(heroHealth)
 		addChild(heroManaBg)
 		addChild(heroMana)
+		addChild(heroEnergy)
 	}
 
 	private func setupEnemyUI() {
@@ -231,6 +256,15 @@ extension GameScene {
 		labelE.horizontalAlignmentMode = .center
 		redSquare.addChild(labelE)
 
+		// Energy Bar
+		let enemyEnergyBg = SKShapeNode(rect: CGRect(x: 0, y: 0, width: barWidth, height: barHeight))
+		enemyEnergyBg.fillColor = .darkGray
+		enemyEnergyBg.strokeColor = .clear
+		enemyEnergyBg.position = CGPoint(x: enemyPosition.x - barWidth / 2, y: enemyPosition.y + barOffset)
+
+		let enemyEnergy = createBarNode(width: barWidth, height: barHeight, color: .orange)
+		enemyEnergy.position = CGPoint(x: enemyPosition.x - barWidth / 2, y: enemyPosition.y + barOffset + 15)
+
 		// Health bar
 		let enemyHealthBg = SKShapeNode(rect: CGRect(x: 0, y: 0, width: barWidth, height: barHeight))
 		enemyHealthBg.fillColor = .darkGray
@@ -252,12 +286,14 @@ extension GameScene {
 		enemy.spriteNode = redSquare
 		enemy.healthBar = enemyHealth
 		enemy.manaBar = enemyMana
+		enemy.energyBar = enemyEnergy
 
 		addChild(redSquare)
 		addChild(enemyHealthBg)
 		addChild(enemyHealth)
 		addChild(enemyManaBg)
 		addChild(enemyMana)
+		addChild(enemyEnergy)
 	}
 
 	private func setupButtons() {
