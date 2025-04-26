@@ -6,7 +6,7 @@ class GameManager {
 	static let shared = GameManager() // Singleton for global access
 
 	private var enemyList: [Enemy] = [
-		
+
 	]
 
 	private var currentEnemyIndex = 0

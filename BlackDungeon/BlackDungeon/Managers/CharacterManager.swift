@@ -50,6 +50,8 @@ class CharacterManager {
 		scene.enemy.currentEnergy = scene.enemy.maxEnergy
 
 		scene.hero.currentEnergy = scene.hero.maxEnergy
+		scene.hero.currentMana = scene.hero.maxMana
+		scene.hero.currentHealth = scene.hero.maxHealth
 
 		scene.currentRound = 1
 		scene.currentRoom += 1
