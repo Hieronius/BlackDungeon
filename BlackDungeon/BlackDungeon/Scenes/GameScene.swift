@@ -14,6 +14,10 @@ class GameScene: SKScene {
 
 	// UI Elements
 	var attackButton: SKShapeNode!
+	var blockButton: SKShapeNode!
+	var spellBookButton: SKShapeNode!
+	var inventoryButton: SKShapeNode!
+	var skillBookButton: SKShapeNode!
 	var endTurnButton: SKShapeNode!
 	var roundLabel: SKLabelNode!
 	var roomLabel: SKLabelNode!

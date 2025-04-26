@@ -186,11 +186,12 @@ class GameUIManager {
 	func setupButtons() {
 		let topHeight = scene.size.height * 0.2
 		let bottomHeight = scene.size.height * 0.3
-		let buttonSize = CGSize(width: 200, height: 60)
+		let topButtonSize = CGSize(width: 200, height: 60)
+		let botButtonSize = CGSize(width: 100, height: 60)
 
 		// MARK: Attack Button
-		scene.attackButton = SKShapeNode(rectOf: buttonSize, cornerRadius: 10)
-		scene.attackButton.position = CGPoint(x: scene.size.width / 2,
+		scene.attackButton = SKShapeNode(rectOf: botButtonSize, cornerRadius: 10)
+		scene.attackButton.position = CGPoint(x: scene.size.width * 0.25,
 											y: bottomHeight / 2 + 40)
 		scene.attackButton.fillColor = .clear
 		scene.attackButton.strokeColor = scene.isHeroTurn ? .white : .red
@@ -204,6 +205,23 @@ class GameUIManager {
 		attackLabel.position = .zero
 		scene.attackButton.addChild(attackLabel)
 		scene.addChild(scene.attackButton)
+
+		// MARK: Block Button
+		scene.blockButton = SKShapeNode(rectOf: botButtonSize, cornerRadius: 10)
+		scene.blockButton.position = CGPoint(x: scene.size.width * 0.75,
+											y: bottomHeight / 2 + 40)
+		scene.blockButton.fillColor = .clear
+		scene.blockButton.strokeColor = scene.isHeroTurn ? .white : .red
+		scene.blockButton.lineWidth = 3
+		scene.blockButton.name = "blockButton"
+
+		let blockLabel = SKLabelNode(text: "Block")
+		blockLabel.fontName = "Helvetica-Bold"
+		blockLabel.fontSize = 30
+		blockLabel.verticalAlignmentMode = .center
+		blockLabel.position = .zero
+		scene.blockButton.addChild(blockLabel)
+		scene.addChild(scene.blockButton)
 
 		// MARK: Round Label
 		scene.roundLabel = SKLabelNode(text: "Round: \(scene.currentRound)")
@@ -224,7 +242,7 @@ class GameUIManager {
 
 
 		// MARK: End Turn Button
-		scene.endTurnButton = SKShapeNode(rectOf: buttonSize, cornerRadius: 10)
+		scene.endTurnButton = SKShapeNode(rectOf: topButtonSize, cornerRadius: 10)
 		scene.endTurnButton.position = CGPoint(x: scene.size.width / 2,
 											 y: scene.roundLabel.position.y - 50)
 		scene.endTurnButton.fillColor = .clear
