@@ -17,7 +17,7 @@ class GameScene: SKScene {
 	var roundLabel: SKLabelNode!
 	let gameOverScreen = SKNode()
 	let resultLabel = SKLabelNode()
-	var actionButton: SKShapeNode!    // For the result‐screen action
+	var actionButton: SKShapeNode!
 
 	// MARK: - Lifecycle
 
@@ -49,6 +49,7 @@ class GameScene: SKScene {
 					resetGame()
 				} else {
 					spawnNewEnemy()
+					print("found new enemy")
 				}
 			default:
 				break
@@ -84,8 +85,8 @@ extension GameScene {
 					  currentHealth: 50,
 					  maxMana: 50,
 					  currentMana: 50,
-					  maxDamage: 15,
-					  minDamage: 10,
+					  maxDamage: 25,
+					  minDamage: 20,
 					  maxEnergy: 5,
 					  currentEnergy: 5,
 					  blockChance: 5,
@@ -131,6 +132,7 @@ extension GameScene {
 	}
 
 	func endCurrentTurn() {
+
 		if isHeroTurn {
 			isHeroTurn = false
 			enemy.currentEnergy = enemy.maxEnergy
@@ -146,6 +148,7 @@ extension GameScene {
 	}
 
 	func updateButtonBorders() {
+
 		let borderColor: SKColor = isHeroTurn ? .white : .red
 		attackButton.strokeColor = borderColor
 		endTurnButton.strokeColor = borderColor
@@ -154,36 +157,56 @@ extension GameScene {
 	// MARK: - Reset / Next Room
 
 	func resetGame() {
+
 		// Reset round & UI
 		currentRound = 1
 		roundLabel.text = "Round: 1"
+		isHeroTurn = true
 
-		// Restore hero
+        // Restore hero
 		hero.currentHealth = hero.maxHealth
 		hero.currentMana = hero.maxMana
 		hero.currentEnergy = hero.maxEnergy
 		updateBarsForHero(for: hero)
 
 		// Re-create enemy fresh
-		setupCharacters()
+		enemy.currentHealth = enemy.maxHealth
+		enemy.currentMana = enemy.maxMana
+		enemy.currentEnergy = enemy.maxEnergy
 		updateBarsForEnemy(for: enemy)
+
+		updateButtonBorders()
 
 		// Hide overlay
 		gameOverScreen.isHidden = true
 	}
 
 	func spawnNewEnemy() {
-		// Your custom spawn logic here...
-		// e.g. pick a new type / increase stats
 
-		// Hide overlay
-		gameOverScreen.isHidden = true
+			enemy.currentHealth = enemy.maxHealth
+			enemy.currentMana = enemy.maxMana
+			enemy.currentEnergy = enemy.maxEnergy
+
+			hero.currentEnergy = hero.maxEnergy
+
+			currentRound = 1
+			roundLabel.text = "Round: 1"
+			isHeroTurn = true
+
+			updateBarsForEnemy(for: enemy)
+			updateBarsForHero(for: hero)
+
+			updateButtonBorders()
+
+			// Hide overlay
+			gameOverScreen.isHidden = true
 	}
 }
 
 // MARK: - Visual Representation Layer
 
 extension GameScene {
+
 	// MARK: - UI Setup
 
 	private func setupGameAreas() {

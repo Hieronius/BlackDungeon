@@ -15,7 +15,7 @@ enum EnemyType {
 
 class Enemy {
 
-	let type: EnemyType
+	var type: EnemyType
 
 	var maxHealth: Int
 	var currentHealth: Int

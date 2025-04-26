@@ -4,3 +4,6 @@ Greatsword | Heavy Attack, Crit Strike, Cleave | High damage, low defense
 Mace (2H) | Armor Break, Stun, Knockback | Anti-armor, control
 Healing Mace + Shield | Stronger Heal, Buff Allies, Absorb Damage | Support tank
 Sword + Heavy Shield | Block, Counterattack, Bash, Taunt | Defensive, stun-heavy tank
+
+
+Add function to generate a random enemy with list of skills, spells and stats. Like the same skeleton can be 30 - 35 hp and has damage 20 - 25. A little bit random
