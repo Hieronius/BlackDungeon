@@ -47,7 +47,7 @@ class CombatManager {
 			scene.isHeroTurn = true
 			scene.hero.currentEnergy = scene.hero.maxEnergy
 			scene.currentRound += 1
-			scene.roundLabel.text = "Round: \(scene.currentRound)"
+			scene.uiManager.roundLabel.text = "Round: \(scene.currentRound)"
 			scene.uiManager.updateBarsForHero(for: scene.hero)
 		}
 		scene.uiManager.updateButtonBorders()
@@ -56,8 +56,8 @@ class CombatManager {
 	func resetGame() {
 		scene.currentRound = 1
 		scene.currentRoom = 1
-		scene.roundLabel.text = "Round: 1"
-		scene.roomLabel.text = "Room: 1"
+		scene.uiManager.roundLabel.text = "Round: 1"
+		scene.uiManager.roomLabel.text = "Room: 1"
 		scene.isHeroTurn = true
 
 		scene.hero.currentHealth = scene.hero.maxHealth
@@ -71,6 +71,6 @@ class CombatManager {
 		scene.uiManager.updateBarsForEnemy(for: scene.enemy)
 
 		scene.uiManager.updateButtonBorders()
-		scene.gameOverScreen.isHidden = true
+		scene.uiManager.gameOverScreen.isHidden = true
 	}
 }

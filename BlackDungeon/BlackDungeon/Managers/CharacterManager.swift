@@ -55,13 +55,13 @@ class CharacterManager {
 
 		scene.currentRound = 1
 		scene.currentRoom += 1
-		scene.roundLabel.text = "Round: 1"
-		scene.roomLabel.text = "Room: \(scene.currentRoom)"
+		scene.uiManager.roundLabel.text = "Round: 1"
+		scene.uiManager.roomLabel.text = "Room: \(scene.currentRoom)"
 		scene.isHeroTurn = true
 
 		scene.uiManager.updateBarsForEnemy(for: scene.enemy)
 		scene.uiManager.updateBarsForHero(for: scene.hero)
 		scene.uiManager.updateButtonBorders()
-		scene.gameOverScreen.isHidden = true
+		scene.uiManager.gameOverScreen.isHidden = true
 	}
 }

@@ -1,8 +1,8 @@
+// GameScene.swift
 import SpriteKit
 
 /// GameScene - Core scene with properties and touch handling
 class GameScene: SKScene {
-
 	// Game state
 	var currentRound: Int = 1
 	var currentRoom: Int = 1
@@ -12,26 +12,12 @@ class GameScene: SKScene {
 	var hero: Hero!
 	var enemy: Enemy!
 
-	// UI Elements
-	var attackButton: SKShapeNode!
-	var blockButton: SKShapeNode!
-	var spellBookButton: SKShapeNode!
-	var inventoryButton: SKShapeNode!
-	var skillBookButton: SKShapeNode!
-	var endTurnButton: SKShapeNode!
-	var roundLabel: SKLabelNode!
-	var roomLabel: SKLabelNode!
-	let gameOverScreen = SKNode()
-	let resultLabel = SKLabelNode()
-	var actionButton: SKShapeNode!
-
 	// Managers
 	lazy var uiManager = GameUIManager(scene: self)
 	lazy var combatManager = CombatManager(scene: self)
 	lazy var characterManager = CharacterManager(scene: self)
 
 	// MARK: Life Cycle
-
 	override func didMove(to view: SKView) {
 		backgroundColor = .black
 		characterManager.setupCharacters()
@@ -52,7 +38,7 @@ class GameScene: SKScene {
 			case "attackButton": combatManager.performAttack()
 			case "endTurnButton": combatManager.endCurrentTurn()
 			case "actionButton":
-				if resultLabel.text == "Game Over" {
+				if uiManager.resultLabel.text == "Game Over" {
 					combatManager.resetGame()
 				} else {
 					characterManager.spawnNewEnemy()

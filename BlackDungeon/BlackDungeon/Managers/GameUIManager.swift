@@ -1,8 +1,22 @@
+// GameUIManager.swift
 import SpriteKit
 
 /// GameUIManager - All UI setup and management
 class GameUIManager {
 	private unowned let scene: GameScene
+
+	// UI Elements
+	var attackButton: SKShapeNode!
+	var blockButton: SKShapeNode!
+	var spellBookButton: SKShapeNode!
+	var inventoryButton: SKShapeNode!
+	var skillBookButton: SKShapeNode!
+	var endTurnButton: SKShapeNode!
+	var roundLabel: SKLabelNode!
+	var roomLabel: SKLabelNode!
+	let gameOverScreen = SKNode()
+	let resultLabel = SKLabelNode()
+	var actionButton: SKShapeNode!
 
 	init(scene: GameScene) {
 		self.scene = scene
@@ -17,14 +31,14 @@ class GameUIManager {
 
 		// MARK: Top Area
 		let topArea = SKShapeNode(rect: CGRect(x: 0, y: scene.size.height - topHeight,
-								 width: scene.size.width, height: topHeight))
+								   width: scene.size.width, height: topHeight))
 		topArea.strokeColor = .white
 		topArea.lineWidth = 2
 		scene.addChild(topArea)
 
 		// MARK: Middle Area
 		let middleArea = SKShapeNode(rect: CGRect(x: 0, y: bottomHeight + menuHeight,
-											  width: scene.size.width, height: middleHeight))
+												  width: scene.size.width, height: middleHeight))
 		middleArea.strokeColor = .white
 		middleArea.lineWidth = 2
 		scene.addChild(middleArea)
@@ -69,7 +83,7 @@ class GameUIManager {
 
 		// MARK: Hero Energy Bar
 		let heroEnergyBg = SKShapeNode(rect: CGRect(x: 0, y: 0,
-												  width: barWidth, height: barHeight))
+												 width: barWidth, height: barHeight))
 		heroEnergyBg.fillColor = .darkGray
 		heroEnergyBg.strokeColor = .clear
 		heroEnergyBg.position = CGPoint(x: heroPosition.x - barWidth / 2,
@@ -83,7 +97,7 @@ class GameUIManager {
 
 		// MARK: Hero Health Bar
 		let heroHealthBg = SKShapeNode(rect: CGRect(x: 0, y: 0,
-												  width: barWidth, height: barHeight))
+												 width: barWidth, height: barHeight))
 		heroHealthBg.fillColor = .darkGray
 		heroHealthBg.strokeColor = .clear
 		heroHealthBg.position = CGPoint(x: heroPosition.x - barWidth / 2,
@@ -97,7 +111,7 @@ class GameUIManager {
 
 		// MARK: Hero Mana Bar
 		let heroManaBg = SKShapeNode(rect: CGRect(x: 0, y: 0,
-											   width: barWidth, height: barHeight))
+											  width: barWidth, height: barHeight))
 		heroManaBg.fillColor = .darkGray
 		heroManaBg.strokeColor = .clear
 		heroManaBg.position = CGPoint(x: heroPosition.x - barWidth / 2,
@@ -198,23 +212,23 @@ class GameUIManager {
 		let botButtonSize = CGSize(width: 100, height: 60)
 
 		// MARK: - Menu Buttons (Perfectly centered in menu area)
-			let menuAreaHeight = scene.size.height * 0.1
-			let menuAreaTop = scene.size.height * 0.3
+		let menuAreaHeight = scene.size.height * 0.1
+		let menuAreaTop = scene.size.height * 0.3
 
-			// Button configuration
-			let rows = 2
-			let cols = 3
-			let horizontalPadding: CGFloat = 10
-			let verticalPadding: CGFloat = 8
-			let buttonWidth = (scene.size.width - horizontalPadding * CGFloat(cols + 1)) / CGFloat(cols)
-			let buttonHeight = (menuAreaHeight - verticalPadding * CGFloat(rows + 1)) / CGFloat(rows)
-			let buttonSize = CGSize(width: buttonWidth, height: buttonHeight)
+		// Button configuration
+		let rows = 2
+		let cols = 3
+		let horizontalPadding: CGFloat = 10
+		let verticalPadding: CGFloat = 8
+		let buttonWidth = (scene.size.width - horizontalPadding * CGFloat(cols + 1)) / CGFloat(cols)
+		let buttonHeight = (menuAreaHeight - verticalPadding * CGFloat(rows + 1)) / CGFloat(rows)
+		let buttonSize = CGSize(width: buttonWidth, height: buttonHeight)
 
-			// Button labels (row-major order)
-			let buttonLabels = [
-				["Spells", "Skills", "Inventory"],
-				["Log", "Map", "Info"]
-			]
+		// Button labels (row-major order)
+		let buttonLabels = [
+			["Spells", "Skills", "Inventory"],
+			["Log", "Map", "Info"]
+		]
 
 		// Create buttons in grid
 		for row in 0..<rows {
@@ -228,6 +242,7 @@ class GameUIManager {
 					name: "\(buttonLabels[row][col].lowercased().replacingOccurrences(of: " ", with: ""))Button",
 					text: buttonLabels[row][col]
 				)
+
 
 				// Menu button styling
 				button.fillColor = SKColor(white: 0.2, alpha: 0.7)
@@ -249,83 +264,82 @@ class GameUIManager {
 		}
 
 		// MARK: Attack Button
-		scene.attackButton = SKShapeNode(rectOf: botButtonSize, cornerRadius: 10)
-		scene.attackButton.position = CGPoint(x: scene.size.width * 0.25,
-											y: bottomHeight / 2 + 40)
-		scene.attackButton.fillColor = .clear
-		scene.attackButton.strokeColor = scene.isHeroTurn ? .white : .red
-		scene.attackButton.lineWidth = 3
-		scene.attackButton.name = "attackButton"
+		attackButton = SKShapeNode(rectOf: botButtonSize, cornerRadius: 10)
+		attackButton.position = CGPoint(x: scene.size.width * 0.25,
+									y: bottomHeight / 2 + 40)
+		attackButton.fillColor = .clear
+		attackButton.strokeColor = scene.isHeroTurn ? .white : .red
+		attackButton.lineWidth = 3
+		attackButton.name = "attackButton"
 
 		let attackLabel = SKLabelNode(text: "Attack")
 		attackLabel.fontName = "Helvetica-Bold"
 		attackLabel.fontSize = 30
 		attackLabel.verticalAlignmentMode = .center
 		attackLabel.position = .zero
-		scene.attackButton.addChild(attackLabel)
-		scene.addChild(scene.attackButton)
+		attackButton.addChild(attackLabel)
+		scene.addChild(attackButton)
 
 		// MARK: Block Button
-		scene.blockButton = SKShapeNode(rectOf: botButtonSize, cornerRadius: 10)
-		scene.blockButton.position = CGPoint(x: scene.size.width * 0.75,
-											y: bottomHeight / 2 + 40)
-		scene.blockButton.fillColor = .clear
-		scene.blockButton.strokeColor = scene.isHeroTurn ? .white : .red
-		scene.blockButton.lineWidth = 3
-		scene.blockButton.name = "blockButton"
+		blockButton = SKShapeNode(rectOf: botButtonSize, cornerRadius: 10)
+		blockButton.position = CGPoint(x: scene.size.width * 0.75,
+									y: bottomHeight / 2 + 40)
+		blockButton.fillColor = .clear
+		blockButton.strokeColor = scene.isHeroTurn ? .white : .red
+		blockButton.lineWidth = 3
+		blockButton.name = "blockButton"
 
 		let blockLabel = SKLabelNode(text: "Block")
 		blockLabel.fontName = "Helvetica-Bold"
 		blockLabel.fontSize = 30
 		blockLabel.verticalAlignmentMode = .center
 		blockLabel.position = .zero
-		scene.blockButton.addChild(blockLabel)
-		scene.addChild(scene.blockButton)
+		blockButton.addChild(blockLabel)
+		scene.addChild(blockButton)
 
 		// MARK: Round Label
-		scene.roundLabel = SKLabelNode(text: "Round: \(scene.currentRound)")
-		scene.roundLabel.fontName = "Helvetica-Bold"
-		scene.roundLabel.fontSize = 30
-		scene.roundLabel.position = CGPoint(x: scene.size.width / 4,
-										   y: scene.size.height - topHeight / 2)
+		roundLabel = SKLabelNode(text: "Round: \(scene.currentRound)")
+		roundLabel.fontName = "Helvetica-Bold"
+		roundLabel.fontSize = 30
+		roundLabel.position = CGPoint(x: scene.size.width / 4,
+								   y: scene.size.height - topHeight / 2)
 
-		scene.addChild(scene.roundLabel)
+		scene.addChild(roundLabel)
 
 		// MARK: Room Label
-		scene.roomLabel = SKLabelNode(text: "Room: \(scene.currentRoom)")
-		scene.roomLabel.fontName = "Helvetica-Bold"
-		scene.roomLabel.fontSize = 30
-		scene.roomLabel.position = CGPoint(x: scene.size.width * 0.75,
-										   y: scene.size.height - topHeight / 2)
-		scene.addChild(scene.roomLabel)
-
+		roomLabel = SKLabelNode(text: "Room: \(scene.currentRoom)")
+		roomLabel.fontName = "Helvetica-Bold"
+		roomLabel.fontSize = 30
+		roomLabel.position = CGPoint(x: scene.size.width * 0.75,
+								   y: scene.size.height - topHeight / 2)
+		scene.addChild(roomLabel)
 
 		// MARK: End Turn Button
-		scene.endTurnButton = SKShapeNode(rectOf: topButtonSize, cornerRadius: 10)
-		scene.endTurnButton.position = CGPoint(x: scene.size.width / 2,
-											 y: scene.roundLabel.position.y - 50)
-		scene.endTurnButton.fillColor = .clear
-		scene.endTurnButton.strokeColor = scene.isHeroTurn ? .white : .red
-		scene.endTurnButton.lineWidth = 3
-		scene.endTurnButton.name = "endTurnButton"
+		endTurnButton = SKShapeNode(rectOf: topButtonSize, cornerRadius: 10)
+		endTurnButton.position = CGPoint(x: scene.size.width / 2,
+									 y: roundLabel.position.y - 50)
+		endTurnButton.fillColor = .clear
+		endTurnButton.strokeColor = scene.isHeroTurn ? .white : .red
+		endTurnButton.lineWidth = 3
+		endTurnButton.name = "endTurnButton"
 
 		let endTurnLabel = SKLabelNode(text: "End Turn")
 		endTurnLabel.fontName = "Helvetica-Bold"
 		endTurnLabel.fontSize = 30
 		endTurnLabel.verticalAlignmentMode = .center
 		endTurnLabel.position = .zero
-		scene.endTurnButton.addChild(endTurnLabel)
-		scene.addChild(scene.endTurnButton)
+		endTurnButton.addChild(endTurnLabel)
+		scene.addChild(endTurnButton)
 	}
 
 	// MARK: - Game Over Screen
 	func setupResultScreen() {
 		// MARK: Container
-		scene.gameOverScreen.position = CGPoint(x: scene.size.width / 2,
-											  y: scene.size.height / 2)
-		scene.gameOverScreen.zPosition = 100
-		scene.gameOverScreen.isHidden = true
-		scene.addChild(scene.gameOverScreen)
+		gameOverScreen.position = CGPoint(x: scene.size.width / 2,
+										y: scene.size.height / 2)
+		gameOverScreen.zPosition = 100
+		gameOverScreen.isHidden = true
+		scene.addChild(gameOverScreen)
 
 		// MARK: Background Panel
 		let bg = SKShapeNode(rectOf: CGSize(width: 300, height: 200),
@@ -333,31 +347,31 @@ class GameUIManager {
 		bg.fillColor = SKColor(white: 0.1, alpha: 0.9)
 		bg.strokeColor = .white
 		bg.lineWidth = 2
-		scene.gameOverScreen.addChild(bg)
+		gameOverScreen.addChild(bg)
 
 		// MARK: Result Label
-		scene.resultLabel.fontName = "Helvetica-Bold"
-		scene.resultLabel.fontSize = 40
-		scene.resultLabel.position = CGPoint(x: 0, y: 50)
-		scene.gameOverScreen.addChild(scene.resultLabel)
+		resultLabel.fontName = "Helvetica-Bold"
+		resultLabel.fontSize = 40
+		resultLabel.position = CGPoint(x: 0, y: 50)
+		gameOverScreen.addChild(resultLabel)
 
 		// MARK: Action Button
-		scene.actionButton = SKShapeNode(path: UIBezierPath(
+		actionButton = SKShapeNode(path: UIBezierPath(
 			roundedRect: CGRect(x: -100, y: -30, width: 200, height: 60),
-									  cornerRadius: 10).cgPath)
-		scene.actionButton.fillColor = .darkGray
-		scene.actionButton.strokeColor = .white
-		scene.actionButton.lineWidth = 2
-		scene.actionButton.position = CGPoint(x: 0, y: -30)
-		scene.actionButton.name = "actionButton"
-		scene.gameOverScreen.addChild(scene.actionButton)
+								  cornerRadius: 10).cgPath)
+		actionButton.fillColor = .darkGray
+		actionButton.strokeColor = .white
+		actionButton.lineWidth = 2
+		actionButton.position = CGPoint(x: 0, y: -30)
+		actionButton.name = "actionButton"
+		gameOverScreen.addChild(actionButton)
 
 		let buttonLabel = SKLabelNode(text: "")
 		buttonLabel.fontName = "Helvetica-Bold"
 		buttonLabel.fontSize = 30
 		buttonLabel.verticalAlignmentMode = .center
 		buttonLabel.position = .zero
-		scene.actionButton.addChild(buttonLabel)
+		actionButton.addChild(buttonLabel)
 	}
 
 	// MARK: - Bar Utilities
@@ -435,9 +449,9 @@ class GameUIManager {
 	// MARK: - Button Visual Updates
 	func updateButtonBorders() {
 		let borderColor: SKColor = scene.isHeroTurn ? .white : .red
-		scene.attackButton.strokeColor = borderColor
-		scene.endTurnButton.strokeColor = borderColor
-		scene.blockButton.strokeColor = borderColor
+		attackButton.strokeColor = borderColor
+		endTurnButton.strokeColor = borderColor
+		blockButton.strokeColor = borderColor
 	}
 
 	// MARK: - Game Over Flow
@@ -445,16 +459,16 @@ class GameUIManager {
 		scene.isUserInteractionEnabled = false
 
 		// Update result text
-		scene.resultLabel.text = isPlayerVictory ? "You Won!" : "Game Over"
-		scene.resultLabel.fontColor = isPlayerVictory ? .green : .red
+		resultLabel.text = isPlayerVictory ? "You Won!" : "Game Over"
+		resultLabel.fontColor = isPlayerVictory ? .green : .red
 
 		// Update button text
-		if let buttonLabel = scene.actionButton.children.first as? SKLabelNode {
+		if let buttonLabel = actionButton.children.first as? SKLabelNode {
 			buttonLabel.text = isPlayerVictory ? "Enter New Room" : "Try Again"
 		}
 
 		// Show screen
-		scene.gameOverScreen.isHidden = false
+		gameOverScreen.isHidden = false
 
 		// Re-enable interaction after delay
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
