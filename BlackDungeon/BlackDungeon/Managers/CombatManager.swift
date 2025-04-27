@@ -1,76 +1,66 @@
 import SpriteKit
 
-/// CombatManager - All combat logic (attacks, turns, reset)
+/// CombatManager - Handles attacks, turns, and game reset
 class CombatManager {
 	private unowned let scene: GameScene
+	private let maxFights = 15
+	private var fightCount = 0
 
 	init(scene: GameScene) {
 		self.scene = scene
 	}
 
+	func startFirstTurn() {
+		scene.isUserInteractionEnabled = true
+		fightCount = 0
+	}
+
 	func performAttack() {
 		if scene.isHeroTurn {
-			if scene.hero.currentEnergy >= 1 {
+			if scene.hero.currentEnergy > 0 {
 				scene.hero.currentEnergy -= 1
-				scene.uiManager.updateBarsForHero(for: scene.hero)
 
-				let avgDamage = (CGFloat(scene.hero.maxDamage) + CGFloat(scene.hero.minDamage)) / 2
-				let damageDealt = max(0, avgDamage - CGFloat(scene.enemy.armor))
-				scene.enemy.currentHealth = max(0, scene.enemy.currentHealth - Int(damageDealt))
-				scene.uiManager.updateBarsForEnemy(for: scene.enemy)
+				let damage = (scene.hero.maxDamage + scene.hero.minDamage) / 2
+				scene.enemy.currentHealth -= damage
+				scene.updateManager.refreshAllBars()
 			}
 		} else {
-			if scene.enemy.currentEnergy >= 1 {
+			if scene.enemy.currentEnergy > 0 {
 				scene.enemy.currentEnergy -= 1
-				scene.uiManager.updateBarsForEnemy(for: scene.enemy)
 
-				let avgDamage = (CGFloat(scene.enemy.maxDamage) + CGFloat(scene.enemy.minDamage)) / 2
-				let damageDealt = max(0, avgDamage - CGFloat(scene.hero.armor))
-				scene.hero.currentHealth = max(0, scene.hero.currentHealth - Int(damageDealt))
-				scene.uiManager.updateBarsForHero(for: scene.hero)
+				let damage = (scene.enemy.maxDamage + scene.enemy.minDamage) / 2
+				scene.hero.currentHealth -= damage
+				scene.updateManager.refreshAllBars()
 			}
 		}
-
-		if scene.hero.currentHealth == 0 {
-			scene.uiManager.gameOver(isPlayerVictory: false)
-		} else if scene.enemy.currentHealth == 0 {
-			scene.uiManager.gameOver(isPlayerVictory: true)
-		}
+		checkFightEnd()
 	}
 
 	func endCurrentTurn() {
+		scene.isUserInteractionEnabled = false
+		scene.gameManager.toggleTurn()
+		fightCount += 1
 		if scene.isHeroTurn {
-			scene.isHeroTurn = false
-			scene.enemy.currentEnergy = scene.enemy.maxEnergy
-			scene.uiManager.updateBarsForEnemy(for: scene.enemy)
-		} else {
-			scene.isHeroTurn = true
 			scene.hero.currentEnergy = scene.hero.maxEnergy
-			scene.currentRound += 1
-			scene.uiManager.roundLabel.text = "Round: \(scene.currentRound)"
-			scene.uiManager.updateBarsForHero(for: scene.hero)
+			scene.gameManager.nextRound()
+		} else {
+			scene.enemy.currentEnergy = scene.enemy.maxEnergy
 		}
-		scene.uiManager.updateButtonBorders()
+		scene.updateManager.refreshAllBars()
+		scene.isUserInteractionEnabled = true
+	}
+
+	private func checkFightEnd() {
+		if scene.hero.currentHealth <= 0 || scene.enemy.currentHealth <= 0 || fightCount >= maxFights {
+			let victory = scene.enemy.currentHealth <= 0
+			scene.updateManager.showGameOver(isPlayerVictory: victory)
+		}
 	}
 
 	func resetGame() {
-		scene.currentRound = 1
-		scene.currentRoom = 1
-		scene.uiManager.roundLabel.text = "Round: 1"
-		scene.uiManager.roomLabel.text = "Room: 1"
-		scene.isHeroTurn = true
-
-		scene.hero.currentHealth = scene.hero.maxHealth
-		scene.hero.currentMana = scene.hero.maxMana
-		scene.hero.currentEnergy = scene.hero.maxEnergy
-		scene.uiManager.updateBarsForHero(for: scene.hero)
-
-		scene.enemy.currentHealth = scene.enemy.maxHealth
-		scene.enemy.currentMana = scene.enemy.maxMana
-		scene.enemy.currentEnergy = scene.enemy.maxEnergy
-		scene.uiManager.updateBarsForEnemy(for: scene.enemy)
-
-		scene.uiManager.updateButtonBorders()
-		scene.uiManager.gameOverScreen.isHidden = true
+		fightCount = 0
+		scene.gameManager.setupRoom()
+		scene.characterManager.resetCharacters()
+		scene.isUserInteractionEnabled = true
 	}
 }

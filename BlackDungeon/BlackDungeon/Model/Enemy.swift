@@ -1,86 +1,47 @@
+// Enemy.swift
 import SpriteKit
 
-enum EnemyType {
+class Enemy: Character {
 
-	case skeleton
-	case skeletonGuard
-	case skeletonArcher
-	case skeletonMage
-	case skeletonLord
-	case skeletonLich
-	case ghost
-	case spider
-	case rat
-}
-
-class Enemy {
-
-	var type: EnemyType
-
-	var maxHealth: Int
+	let name: String
+	let maxHealth: Int
 	var currentHealth: Int
-
-	var maxMana: Int
+	let maxMana: Int
 	var currentMana: Int
-
+	let maxEnergy: Int
+	var currentEnergy: Int
 	var maxDamage: Int
 	var minDamage: Int
+	let skills: [Skill]
+	let spells: [Spell]
 
-	var maxEnergy: Int
-    var currentEnergy: Int
-
-	var blockChance: Int
-	var criticalRate: Int
-
-	var armor: Int
-
-	var skills: [Skill]
-
-	var spells: [Spell]
-
-	var weaponType: WeaponType
-
-	var inventory: [Item]
-
-	// Link to sprite and bars
+	// Sprite references
 	weak var spriteNode: SKNode?
 	weak var healthBar: SKShapeNode?
 	weak var manaBar: SKShapeNode?
 	weak var energyBar: SKShapeNode?
 
-	init(
-		type: EnemyType,
+	init(name: String,
 		 maxHealth: Int,
 		 currentHealth: Int,
 		 maxMana: Int,
 		 currentMana: Int,
-		 maxDamage: Int,
-		 minDamage: Int,
 		 maxEnergy: Int,
 		 currentEnergy: Int,
-		 blockChance: Int,
-		 criticalRate: Int,
-		 armor: Int,
+		 maxDamage: Int,
+		 minDamage: Int,
 		 skills: [Skill],
-		 spells: [Spell],
-		 weaponType: WeaponType,
-		 inventory: [Item]
-	) {
-		self.type = type
+		 spells: [Spell]) {
+		self.name = name
 		self.maxHealth = maxHealth
 		self.currentHealth = currentHealth
 		self.maxMana = maxMana
 		self.currentMana = currentMana
-		self.maxDamage = maxDamage
-		self.minDamage = minDamage
 		self.maxEnergy = maxEnergy
 		self.currentEnergy = currentEnergy
-		self.blockChance = blockChance
-		self.criticalRate = criticalRate
-		self.armor = armor
 		self.skills = skills
 		self.spells = spells
-		self.weaponType = weaponType
-		self.inventory = inventory
+		self.maxDamage = maxDamage
+		self.minDamage = minDamage
 	}
 }

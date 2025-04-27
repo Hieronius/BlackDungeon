@@ -2,7 +2,7 @@
 import SpriteKit
 
 /// GameUIManager - All UI setup and management
-class GameUIManager {
+class SpriteManager {
 	private unowned let scene: GameScene
 
 	// UI Elements
@@ -385,44 +385,6 @@ class GameUIManager {
 		return bar
 	}
 
-	func updateBar(barNode: SKShapeNode, widthRatio: CGFloat) {
-		let clampedRatio = max(0, min(widthRatio, 1))
-		let newPath = CGMutablePath()
-		newPath.addRect(CGRect(x: 0, y: 0, width: 120 * clampedRatio, height: 10))
-		barNode.path = newPath
-	}
-
-	// MARK: - Health/Mana/Energy Updates
-	func updateBarsForHero(for character: Hero) {
-		if let energyBar = character.energyBar {
-			updateBar(barNode: energyBar,
-					 widthRatio: CGFloat(character.currentEnergy) / CGFloat(character.maxEnergy))
-		}
-		if let healthBar = character.healthBar {
-			updateBar(barNode: healthBar,
-					 widthRatio: CGFloat(character.currentHealth) / CGFloat(character.maxHealth))
-		}
-		if let manaBar = character.manaBar {
-			updateBar(barNode: manaBar,
-					 widthRatio: CGFloat(character.currentMana) / CGFloat(character.maxMana))
-		}
-	}
-
-	func updateBarsForEnemy(for character: Enemy) {
-		if let energyBar = character.energyBar {
-			updateBar(barNode: energyBar,
-					 widthRatio: CGFloat(character.currentEnergy) / CGFloat(character.maxEnergy))
-		}
-		if let healthBar = character.healthBar {
-			updateBar(barNode: healthBar,
-					 widthRatio: CGFloat(character.currentHealth) / CGFloat(character.maxHealth))
-		}
-		if let manaBar = character.manaBar {
-			updateBar(barNode: manaBar,
-					 widthRatio: CGFloat(character.currentMana) / CGFloat(character.maxMana))
-		}
-	}
-
 	// MARK: Create Button
 	func createButton(size: CGSize, position: CGPoint, name: String, text: String) -> SKShapeNode {
 		let button = SKShapeNode(rectOf: size, cornerRadius: 6) // Slightly rounded corners
@@ -444,14 +406,6 @@ class GameUIManager {
 		scene.addChild(button)
 
 		return button
-	}
-
-	// MARK: - Button Visual Updates
-	func updateButtonBorders() {
-		let borderColor: SKColor = scene.isHeroTurn ? .white : .red
-		attackButton.strokeColor = borderColor
-		endTurnButton.strokeColor = borderColor
-		blockButton.strokeColor = borderColor
 	}
 
 	// MARK: - Game Over Flow

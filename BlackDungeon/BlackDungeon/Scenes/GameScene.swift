@@ -13,19 +13,23 @@ class GameScene: SKScene {
 	var enemy: Enemy!
 
 	// Managers
-	lazy var uiManager = GameUIManager(scene: self)
+	lazy var spriteManager = SpriteManager(scene: self)
 	lazy var combatManager = CombatManager(scene: self)
 	lazy var characterManager = CharacterManager(scene: self)
+	lazy var updateManager = UpdateManager(scene: self)
+	lazy var gameManager = GameManager(scene: self)
 
 	// MARK: Life Cycle
 	override func didMove(to view: SKView) {
 		backgroundColor = .black
+		spriteManager.setupGameAreas()
+		spriteManager.setupButtons()
 		characterManager.setupCharacters()
-		uiManager.setupGameAreas()
-		uiManager.setupHeroUI()
-		uiManager.setupEnemyUI()
-		uiManager.setupButtons()
-		uiManager.setupResultScreen()
+		spriteManager.setupHeroUI()
+		spriteManager.setupEnemyUI()
+		spriteManager.setupResultScreen()
+	    updateManager.refreshAllBars()
+		print("YOU MORON")
 	}
 
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -36,12 +40,14 @@ class GameScene: SKScene {
 		for node in nodesAtPoint {
 			switch node.name {
 			case "attackButton": combatManager.performAttack()
-			case "endTurnButton": combatManager.endCurrentTurn()
+			case "endTurnButton":
+				combatManager.endCurrentTurn()
+				updateManager.updateButtonBorders()
 			case "actionButton":
-				if uiManager.resultLabel.text == "Game Over" {
+				if spriteManager.resultLabel.text == "Game Over" {
 					combatManager.resetGame()
 				} else {
-					characterManager.spawnNewEnemy()
+					characterManager.spawnEnemy()
 				}
 			case "mapButton": print("MapButton pressed")
 			default: break

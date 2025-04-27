@@ -1,74 +1,46 @@
+// Hero.swift
 import SpriteKit
 
-class Hero {
-
+class Hero: Character {
 	let name: String
-
-	var maxHealth: Int
+	let maxHealth: Int
 	var currentHealth: Int
-
-	var maxMana: Int
+	let maxMana: Int
 	var currentMana: Int
-
-	var maxEnergy: Int
+	let maxEnergy: Int
 	var currentEnergy: Int
-
-	var minDamage: Int
 	var maxDamage: Int
+	var minDamage: Int
+	let skills: [Skill]
+	let spells: [Spell]
 
-	var blockChance: Int
-	var criticalRate: Int
-
-	var armor: Int
-
-	var skills: [Skill]
-
-	var spells: [Spell]
-
-	var weaponType: HeroWeaponType
-
-	var inventory: [Item]
-
-	// Link to sprite and bars
+	// Sprite references (weak not needed since we're using optionals)
 	weak var spriteNode: SKNode?
 	weak var healthBar: SKShapeNode?
 	weak var manaBar: SKShapeNode?
 	weak var energyBar: SKShapeNode?
 
-	init(
-		 name: String,
+	init(name: String,
 		 maxHealth: Int,
 		 currentHealth: Int,
 		 maxMana: Int,
 		 currentMana: Int,
-		 maxDamage: Int,
-		 minDamage: Int,
 		 maxEnergy: Int,
 		 currentEnergy: Int,
-		 blockChance: Int,
-		 criticalRate: Int,
-		 armor: Int,
+		 maxDamage: Int,
+		 minDamage: Int,
 		 skills: [Skill],
-		 spells: [Spell],
-		 weaponType: HeroWeaponType,
-		 inventory: [Item]
-	) {
+		 spells: [Spell]) {
 		self.name = name
 		self.maxHealth = maxHealth
 		self.currentHealth = currentHealth
 		self.maxMana = maxMana
 		self.currentMana = currentMana
-		self.maxDamage = maxDamage
-		self.minDamage = minDamage
 		self.maxEnergy = maxEnergy
 		self.currentEnergy = currentEnergy
-		self.blockChance = blockChance
-		self.criticalRate = criticalRate
-		self.armor = armor
+		self.maxDamage = maxDamage
+		self.minDamage = minDamage
 		self.skills = skills
 		self.spells = spells
-		self.weaponType = weaponType
-		self.inventory = inventory
 	}
-
 }

@@ -21,10 +21,12 @@
 		DDA9F1882DBBE4BF009B5877 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1872DBBE4BF009B5877 /* Weapon.swift */; };
 		DDA9F18A2DBBE55E009B5877 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA9F1892DBBE55E009B5877 /* Items.swift */; };
 		DDA9F18D2DBBFBCC009B5877 /* CombatMechanics in Resources */ = {isa = PBXBuildFile; fileRef = DDA9F18C2DBBFBCC009B5877 /* CombatMechanics */; };
+		DDAA5A042DBE6BCB006F6F3A /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA5A032DBE6BCB006F6F3A /* Character.swift */; };
+		DDAA5A062DBE6D2F006F6F3A /* UpdateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA5A052DBE6D2F006F6F3A /* UpdateManager.swift */; };
+		DDAA5A082DBE6E0C006F6F3A /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAA5A072DBE6E0C006F6F3A /* GameManager.swift */; };
 		DDAB19212DBD36F800DF3CC3 /* CombatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19202DBD36F800DF3CC3 /* CombatManager.swift */; };
 		DDAB19232DBD371600DF3CC3 /* CharacterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19222DBD371600DF3CC3 /* CharacterManager.swift */; };
-		DDAB19252DBD372C00DF3CC3 /* GameUIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19242DBD372C00DF3CC3 /* GameUIManager.swift */; };
-		DDAB19282DBD41D500DF3CC3 /* EnemiesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19272DBD41D500DF3CC3 /* EnemiesManager.swift */; };
+		DDAB19252DBD372C00DF3CC3 /* SpriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAB19242DBD372C00DF3CC3 /* SpriteManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,10 +47,12 @@
 		DDA9F1892DBBE55E009B5877 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 		DDA9F18B2DBBE60A009B5877 /* Armor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Armor.swift; sourceTree = "<group>"; };
 		DDA9F18C2DBBFBCC009B5877 /* CombatMechanics */ = {isa = PBXFileReference; lastKnownFileType = text; path = CombatMechanics; sourceTree = "<group>"; };
+		DDAA5A032DBE6BCB006F6F3A /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		DDAA5A052DBE6D2F006F6F3A /* UpdateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateManager.swift; sourceTree = "<group>"; };
+		DDAA5A072DBE6E0C006F6F3A /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		DDAB19202DBD36F800DF3CC3 /* CombatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombatManager.swift; sourceTree = "<group>"; };
 		DDAB19222DBD371600DF3CC3 /* CharacterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterManager.swift; sourceTree = "<group>"; };
-		DDAB19242DBD372C00DF3CC3 /* GameUIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUIManager.swift; sourceTree = "<group>"; };
-		DDAB19272DBD41D500DF3CC3 /* EnemiesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemiesManager.swift; sourceTree = "<group>"; };
+		DDAB19242DBD372C00DF3CC3 /* SpriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 		DDA9F1782DBBDCB8009B5877 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				DDAA5A032DBE6BCB006F6F3A /* Character.swift */,
 				DDA9F17B2DBBDCEB009B5877 /* Hero.swift */,
 				DDA9F17E2DBBE123009B5877 /* Enemy.swift */,
 				DDA9F1802DBBE1B3009B5877 /* Skill.swift */,
@@ -139,8 +144,9 @@
 			children = (
 				DDAB19202DBD36F800DF3CC3 /* CombatManager.swift */,
 				DDAB19222DBD371600DF3CC3 /* CharacterManager.swift */,
-				DDAB19242DBD372C00DF3CC3 /* GameUIManager.swift */,
-				DDAB19272DBD41D500DF3CC3 /* EnemiesManager.swift */,
+				DDAB19242DBD372C00DF3CC3 /* SpriteManager.swift */,
+				DDAA5A052DBE6D2F006F6F3A /* UpdateManager.swift */,
+				DDAA5A072DBE6E0C006F6F3A /* GameManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -216,6 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDAA5A082DBE6E0C006F6F3A /* GameManager.swift in Sources */,
 				DDA9F1812DBBE1B3009B5877 /* Skill.swift in Sources */,
 				DDA9F17C2DBBDCEB009B5877 /* Hero.swift in Sources */,
 				DDA9F1642DBBD41E009B5877 /* GameScene.swift in Sources */,
@@ -223,12 +230,13 @@
 				DDA9F17F2DBBE123009B5877 /* Enemy.swift in Sources */,
 				DDA9F18A2DBBE55E009B5877 /* Items.swift in Sources */,
 				DDA9F1882DBBE4BF009B5877 /* Weapon.swift in Sources */,
+				DDAA5A042DBE6BCB006F6F3A /* Character.swift in Sources */,
 				DDAB19212DBD36F800DF3CC3 /* CombatManager.swift in Sources */,
 				DDAB19232DBD371600DF3CC3 /* CharacterManager.swift in Sources */,
-				DDAB19282DBD41D500DF3CC3 /* EnemiesManager.swift in Sources */,
 				DDA9F1662DBBD41E009B5877 /* GameViewController.swift in Sources */,
 				DDA9F15E2DBBD41E009B5877 /* AppDelegate.swift in Sources */,
-				DDAB19252DBD372C00DF3CC3 /* GameUIManager.swift in Sources */,
+				DDAA5A062DBE6D2F006F6F3A /* UpdateManager.swift in Sources */,
+				DDAB19252DBD372C00DF3CC3 /* SpriteManager.swift in Sources */,
 				DDA9F1832DBBE227009B5877 /* Spell.swift in Sources */,
 				DDA9F1752DBBD48B009B5877 /* SceneDelegate.swift in Sources */,
 			);

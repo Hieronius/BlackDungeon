@@ -1,67 +1,49 @@
 import SpriteKit
 
-/// CharacterManager - Character setup and spawning
+/// CharacterManager - Manages spawning and resetting Characters
 class CharacterManager {
 	private unowned let scene: GameScene
+	private var enemyList: [Enemy] = []
 
 	init(scene: GameScene) {
 		self.scene = scene
+		// Prepare a list of enemies
+		enemyList = [
+			Enemy(name: "Skeleton", maxHealth: 15, currentHealth: 15, maxMana: 0, currentMana: 0, maxEnergy: 1, currentEnergy: 1, maxDamage: 5, minDamage: 2, skills: [], spells: []),
+			// ... add 15 similar enemies
+		]
 	}
 
 	func setupCharacters() {
+		// Hero
 		scene.hero = Hero(name: "Hieronius",
-						 maxHealth: 100,
-						 currentHealth: 100,
-						 maxMana: 100,
-						 currentMana: 100,
-						 maxDamage: 15,
-						 minDamage: 10,
-						 maxEnergy: 5,
-						 currentEnergy: 5,
-						 blockChance: 10,
-						 criticalRate: 10,
-						 armor: 10,
-						 skills: [],
-						 spells: [],
-						 weaponType: .twoHandedSword,
-						 inventory: [])
-
-		scene.enemy = Enemy(type: .skeleton,
-						   maxHealth: 50,
-						   currentHealth: 50,
-						   maxMana: 50,
-						   currentMana: 50,
-						   maxDamage: 25,
-						   minDamage: 20,
-						   maxEnergy: 5,
-						   currentEnergy: 5,
-						   blockChance: 5,
-						   criticalRate: 5,
-						   armor: 5,
-						   skills: [],
-						   spells: [],
-						   weaponType: .sword,
-						   inventory: [])
+						  maxHealth: 100,
+						  currentHealth: 100,
+						  maxMana: 50,
+						  currentMana: 50,
+						  maxEnergy: 3,
+						  currentEnergy: 3,
+						  maxDamage: 10,
+						  minDamage: 5,
+						  skills: [],
+						  spells: [])
+		// First enemy
+		spawnEnemy()
 	}
 
-	func spawnNewEnemy() {
+	func spawnEnemy() {
+		guard !enemyList.isEmpty else { return }
+		scene.enemy = enemyList.removeFirst()
+		scene.updateManager.refreshAllBars()
+	}
+
+	func resetCharacters() {
+		scene.hero.currentHealth = scene.hero.maxHealth
+		scene.hero.currentMana = scene.hero.maxMana
+		scene.hero.currentEnergy = scene.hero.maxEnergy
 		scene.enemy.currentHealth = scene.enemy.maxHealth
 		scene.enemy.currentMana = scene.enemy.maxMana
 		scene.enemy.currentEnergy = scene.enemy.maxEnergy
-
-		scene.hero.currentEnergy = scene.hero.maxEnergy
-		scene.hero.currentMana = scene.hero.maxMana
-		scene.hero.currentHealth = scene.hero.maxHealth
-
-		scene.currentRound = 1
-		scene.currentRoom += 1
-		scene.uiManager.roundLabel.text = "Round: 1"
-		scene.uiManager.roomLabel.text = "Room: \(scene.currentRoom)"
-		scene.isHeroTurn = true
-
-		scene.uiManager.updateBarsForEnemy(for: scene.enemy)
-		scene.uiManager.updateBarsForHero(for: scene.hero)
-		scene.uiManager.updateButtonBorders()
-		scene.uiManager.gameOverScreen.isHidden = true
+		scene.updateManager.refreshAllBars()
 	}
 }
