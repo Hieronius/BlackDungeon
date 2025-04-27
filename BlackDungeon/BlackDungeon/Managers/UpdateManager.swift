@@ -53,11 +53,6 @@ class UpdateManager {
 		mgr.blockButton.strokeColor   = color
 	}
 
-	func showGameOver(isPlayerVictory: Bool) {
-		scene.spriteManager.resultLabel.text = isPlayerVictory ? "Victory" : "Defeat"
-		scene.spriteManager.gameOverScreen.isHidden = false
-	}
-
 	func updateBar(barNode: SKShapeNode, widthRatio: CGFloat) {
 		let clampedRatio = max(0, min(widthRatio, 1))
 		let newPath = CGMutablePath()

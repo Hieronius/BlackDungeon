@@ -366,7 +366,7 @@ class SpriteManager {
 		actionButton.name = "actionButton"
 		gameOverScreen.addChild(actionButton)
 
-		let buttonLabel = SKLabelNode(text: "")
+		let buttonLabel = SKLabelNode(text: "Action")
 		buttonLabel.fontName = "Helvetica-Bold"
 		buttonLabel.fontSize = 30
 		buttonLabel.verticalAlignmentMode = .center
@@ -411,6 +411,7 @@ class SpriteManager {
 	// MARK: - Game Over Flow
 	func gameOver(isPlayerVictory: Bool) {
 		scene.isUserInteractionEnabled = false
+		print("game over / victory")
 
 		// Update result text
 		resultLabel.text = isPlayerVictory ? "You Won!" : "Game Over"

@@ -53,7 +53,8 @@ class CombatManager {
 	private func checkFightEnd() {
 		if scene.hero.currentHealth <= 0 || scene.enemy.currentHealth <= 0 || fightCount >= maxFights {
 			let victory = scene.enemy.currentHealth <= 0
-			scene.updateManager.showGameOver(isPlayerVictory: victory)
+			scene.spriteManager.gameOver(isPlayerVictory: victory)
+			
 		}
 	}
 

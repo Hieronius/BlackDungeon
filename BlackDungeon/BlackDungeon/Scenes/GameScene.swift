@@ -48,6 +48,11 @@ class GameScene: SKScene {
 					combatManager.resetGame()
 				} else {
 					characterManager.spawnEnemy()
+					gameManager.setupRoom()
+					spriteManager.setupEnemyUI()
+					characterManager.resetCharacters()
+					spriteManager.gameOverScreen.isHidden = true
+					updateManager.refreshAllBars()
 				}
 			case "mapButton": print("MapButton pressed")
 			default: break
